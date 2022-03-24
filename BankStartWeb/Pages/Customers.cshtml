@@ -1,0 +1,25 @@
+﻿@page
+@model BankStartWeb.Pages.CustomersModel
+@{
+}
+
+<h1>All Customers</h1>
+
+<table class="table">
+    <tr>
+        <td>Given Name</td>
+        <td>Sur Name</td>
+        <td>Street Address</td>
+    </tr>
+    @foreach(var customer in Model.CustomersList)
+    {
+        <tr>
+            <td>@customer.Givenname</td>
+            <td>@customer.Surname</td>
+            <td>@customer.Streetaddress</td>
+        </tr>
+        <td>
+            <a asp-page="/Customer" asp-route-Id="@customer.Id">EDIT</a>
+        </td>
+    }
+</table>
