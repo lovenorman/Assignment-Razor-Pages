@@ -30,13 +30,34 @@ namespace BankStartWeb.Pages
             
             if(col ==  "id")
             {
-                if(order =="asc")
-                    c. = c.OrderBy(ord => ord.Id)
+                if (order == "asc")
+                    c = c.OrderBy(ord => ord.Id);
                 else
-                    c. = c.
+                    c = c.OrderByDescending(ord => ord.Id);
             }
-            
-            CustomersList = _context.Customers.Take(50).Select(c =>
+            else if(col == "givenName")
+            {
+                if (order == "asc")
+                    c = c.OrderBy(ord => ord.Givenname);
+                else
+                    c = c.OrderByDescending(ord => ord.Givenname);
+            }
+            else if (col == "surName")
+            {
+                if (order == "asc")
+                    c = c.OrderBy(ord => ord.Surname);
+                else
+                    c = c.OrderByDescending(ord => ord.Surname);
+            }
+            else if (col == "streetAddress")
+            {
+                if (order == "asc")
+                    c = c.OrderBy(ord => ord.Streetaddress);
+                else
+                    c = c.OrderByDescending(ord => ord.Streetaddress);
+            }
+
+            CustomersList = c.Take(50).Select(c =>
             new CustomersViewModel
             {
                 Id = c.Id,
