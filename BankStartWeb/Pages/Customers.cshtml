@@ -7,14 +7,16 @@
 
 <table class="table">
     <tr>
+        <td>Id</td>
         <td>Given Name</td>
         <td>Sur Name</td>
         <td>Street Address</td>
     </tr>
     @foreach(var customer in Model.CustomersList)
     {
-        <tr>
-            <td>@customer.Givenname</td>
+        <tr>    
+            <td><a asp-route-id="@customer.Id" asp-page="/Customer">@customer.Id</a></td>
+             <td>@customer.Givenname</td>
             <td>@customer.Surname</td>
             <td>@customer.Streetaddress</td>
         </tr>
