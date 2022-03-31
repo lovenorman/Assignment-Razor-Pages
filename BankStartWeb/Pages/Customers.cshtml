@@ -7,10 +7,30 @@
 
 <table class="table">
     <tr>
-        <td>Id</td>
-        <td>Given Name</td>
-        <td>Sur Name</td>
-        <td>Street Address</td>
+        <td>Id
+            <a asp-page="/Customers" asp-route-col="id" asp-route-order="asc" >
+                <i class='bx bx-sort-up'></i></a>
+            <a asp-page="/Customers" asp-route-col="id" asp-route-order="desc" >
+                <i class='bx bx-sort-down' ></i></a>
+        </td>
+        <td>Given Name
+            <a asp-page="/Customers" asp-route-col="id" asp-route-order="asc" >
+                <i class='bx bx-sort-up'></i></a>
+            <a asp-page="/Customers" asp-route-col="id" asp-route-order="desc" >
+                <i class='bx bx-sort-down' ></i></a>
+        </td>
+        <td>Sur Name
+            <a asp-page="/Customers" asp-route-col="id" asp-route-order="asc" >
+                <i class='bx bx-sort-up'></i></a>
+            <a asp-page="/Customers" asp-route-col="id" asp-route-order="desc" >
+                <i class='bx bx-sort-down' ></i></a>
+        </td>
+        <td>Street Address
+            <a asp-page="/Customers" asp-route-col="id" asp-route-order="asc" >
+                <i class='bx bx-sort-up'></i></a>
+            <a asp-page="/Customers" asp-route-col="id" asp-route-order="desc" >
+                <i class='bx bx-sort-down' ></i></a>
+        </td>
     </tr>
     @foreach(var customer in Model.CustomersList)
     {

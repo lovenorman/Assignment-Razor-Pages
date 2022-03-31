@@ -1,6 +1,7 @@
 using BankStartWeb.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages
 {
@@ -23,8 +24,18 @@ namespace BankStartWeb.Pages
 
         public List<CustomersViewModel> CustomersList = new List<CustomersViewModel>();
 
-        public void OnGet()
+        public void OnGet(string col="id", string order="asc")
         {
+            var c = _context.Customers.AsQueryable();
+            
+            if(col ==  "id")
+            {
+                if(order =="asc")
+                    c. = c.OrderBy(ord => ord.Id)
+                else
+                    c. = c.
+            }
+            
             CustomersList = _context.Customers.Take(50).Select(c =>
             new CustomersViewModel
             {
