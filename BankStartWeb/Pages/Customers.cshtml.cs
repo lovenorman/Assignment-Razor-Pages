@@ -13,7 +13,8 @@ namespace BankStartWeb.Pages
         {
             _context = context;
         }
-
+        public string SearchWord { get; set; }
+        public int SearchId { get; set; }
         public class CustomersViewModel
         {
             public int Id { get; set; }
@@ -24,9 +25,20 @@ namespace BankStartWeb.Pages
 
         public List<CustomersViewModel> CustomersList = new List<CustomersViewModel>();
 
-        public void OnGet(string col="id", string order="asc")
+        public void OnGet(int searchId, string searchWord, string col="id", string order="asc")
         {
+            SearchWord = searchWord;
             var c = _context.Customers.AsQueryable();
+
+            if(!string.IsNullOrEmpty(SearchWord))
+                c = c.Where(c => c.Givenname.Contains(searchWord)
+                                    || c.Surname.Contains(searchWord)
+                           );
+
+            //SearchId = searchId;
+            //var i = _context.Customers.AsQueryable();
+            
+            //i = i.Where(i => i.Id == searchId);
             
             if(col ==  "id")
             {
