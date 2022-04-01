@@ -14,8 +14,7 @@ namespace BankStartWeb.Pages
         {
             _customersService = customersService;   
         }
-        public string SearchWord { get; set; }
-        public int SearchId { get; set; }
+       
         public class CustomersViewModel
         {
             public int Id { get; set; }
@@ -28,47 +27,44 @@ namespace BankStartWeb.Pages
 
         public void OnGet(int searchId, string searchWord, string col="id", string order="asc")
         {
-            SearchWord = searchWord;
-            var c = _context.Customers.AsQueryable();
+            //1. Kalla på metoden SearchByName via _customersService
 
-            if(!string.IsNullOrEmpty(SearchWord))
-                c = c.Where(c => c.Givenname.Contains(searchWord)
-                                    || c.Surname.Contains(searchWord)
-                           );
 
             //SearchId = searchId;
             //var i = _context.Customers.AsQueryable();
-            
+
             //i = i.Where(i => i.Id == searchId);
+
+            var c = _customersService;
             
-            if(col ==  "id")
-            {
-                if (order == "asc")
-                    c = c.OrderBy(ord => ord.Id);
-                else
-                    c = c.OrderByDescending(ord => ord.Id);
-            }
-            else if(col == "givenName")
-            {
-                if (order == "asc")
-                    c = c.OrderBy(ord => ord.Givenname);
-                else
-                    c = c.OrderByDescending(ord => ord.Givenname);
-            }
-            else if (col == "surName")
-            {
-                if (order == "asc")
-                    c = c.OrderBy(ord => ord.Surname);
-                else
-                    c = c.OrderByDescending(ord => ord.Surname);
-            }
-            else if (col == "streetAddress")
-            {
-                if (order == "asc")
-                    c = c.OrderBy(ord => ord.Streetaddress);
-                else
-                    c = c.OrderByDescending(ord => ord.Streetaddress);
-            }
+            //if(col ==  "id")
+            //{
+            //    if (order == "asc")
+            //        c = c.OrderBy(ord => ord.Id);
+            //    else
+            //        c = c.OrderByDescending(ord => ord.Id);
+            //}
+            //else if(col == "givenName")
+            //{
+            //    if (order == "asc")
+            //        c = c.OrderBy(ord => ord.Givenname);
+            //    else
+            //        c = c.OrderByDescending(ord => ord.Givenname);
+            //}
+            //else if (col == "surName")
+            //{
+            //    if (order == "asc")
+            //        c = c.OrderBy(ord => ord.Surname);
+            //    else
+            //        c = c.OrderByDescending(ord => ord.Surname);
+            //}
+            //else if (col == "streetAddress")
+            //{
+            //    if (order == "asc")
+            //        c = c.OrderBy(ord => ord.Streetaddress);
+            //    else
+            //        c = c.OrderByDescending(ord => ord.Streetaddress);
+            //}
 
             CustomersList = c.Take(50).Select(c =>
             new CustomersViewModel
