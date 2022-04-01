@@ -1,4 +1,5 @@
 using BankStartWeb.Data;
+using BankStartWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -7,11 +8,11 @@ namespace BankStartWeb.Pages
 {
     public class CustomersModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICustomersService _customersService;
 
-        public CustomersModel(ApplicationDbContext context)
+        public CustomersModel(ICustomersService customersService)
         {
-            _context = context;
+            _customersService = customersService;   
         }
         public string SearchWord { get; set; }
         public int SearchId { get; set; }
