@@ -51,7 +51,7 @@ namespace BankStartWeb.Pages
 
             var c = _context.Customers.AsQueryable();
 
-            //SortByName
+            //Search (nam el stad)
             if (!string.IsNullOrEmpty(SearchWord))
                 c = c.Where(c => c.Givenname.Contains(searchWord)
                                     || c.Surname.Contains(searchWord)
@@ -63,12 +63,36 @@ namespace BankStartWeb.Pages
                 order == "asc" ? ExtensionMethods.QuerySortOrder.Asc :
                     ExtensionMethods.QuerySortOrder.Desc);
 
+            //Paging
+            var pageResult = c.GetPaged(PageNo, 20);
+            TotalPageCount = pageResult.PageCount;
+
+            //Hämtar från databas
+            CustomersList = pageResult.Results.Select(c =>
+            new CustomersViewModel
+            {
+                Id = c.Id,
+                NationalId = c.NationalId,
+                Givenname = c.Givenname,
+                Surname = c.Surname,
+                Streetaddress = c.Streetaddress,
+                City = c.City
+            }).ToList();
+
+
+            //SortById (eller personnr?) ska flyttas
+
             //SearchId = searchId;
             //var i = _context.Customers.AsQueryable();
 
             //i = i.Where(i => i.Id == searchId);
 
 
+
+            
+            
+            
+            //Gamla OrderBy
 
             //if(col ==  "id")
             //{
@@ -99,19 +123,7 @@ namespace BankStartWeb.Pages
             //        c = c.OrderByDescending(ord => ord.Streetaddress);
             //}
 
-            var pageResult = c.GetPaged(PageNo, 20);
-            TotalPageCount = pageResult.PageCount;
 
-            CustomersList = pageResult.Results.Select(c =>
-            new CustomersViewModel
-            {
-                Id = c.Id,
-                NationalId = c.NationalId,
-                Givenname = c.Givenname,
-                Surname = c.Surname,
-                Streetaddress = c.Streetaddress,
-                City = c.City  
-            }).ToList();
         }
     }
 }
