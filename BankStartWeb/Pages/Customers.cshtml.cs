@@ -7,6 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages
 {
+    //1. En lista ska visas med kundnummer och personnummer, namn, adress, city
+    //  som sökresultat.Sökresultatet ska vara paginerat (50 resultat i taget
+    //  och så ska man kunna bläddra till nästa/tidigare sida).
+    //2.  Klickar man på en kund ska man komma till kundbilden.
+
+
     public class CustomersModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -29,9 +35,11 @@ namespace BankStartWeb.Pages
         public class CustomersViewModel
         {
             public int Id { get; set; }
+            public string NationalId { get; set; } 
             public string Givenname { get; set; }
             public string Surname { get; set; }
             public string Streetaddress { get; set; }
+            public string City { get; set; }
         }
 
         public void OnGet(string searchWord, string col = "Id", string order = "asc", int pageno = 1)
@@ -47,6 +55,7 @@ namespace BankStartWeb.Pages
             if (!string.IsNullOrEmpty(SearchWord))
                 c = c.Where(c => c.Givenname.Contains(searchWord)
                                     || c.Surname.Contains(searchWord)
+                                    || c.City.Contains(searchWord)
                            );
 
             //OrderBy
@@ -97,9 +106,11 @@ namespace BankStartWeb.Pages
             new CustomersViewModel
             {
                 Id = c.Id,
+                NationalId = c.NationalId,
                 Givenname = c.Givenname,
                 Surname = c.Surname,
-                Streetaddress = c.Streetaddress
+                Streetaddress = c.Streetaddress,
+                City = c.City  
             }).ToList();
         }
     }

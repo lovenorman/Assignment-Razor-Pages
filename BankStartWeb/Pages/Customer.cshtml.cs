@@ -6,6 +6,13 @@ namespace BankStartWeb.Pages
 {
     public class CustomerModel : PageModel
     {
+        //1. Visar kontonummer och saldo samt en lista med transaktioner i
+        //  descending order.
+
+        //2. Om det finns fler än 20 transaktioner ska JavaScript/AJAX
+        //  användas för att ladda in ytterligare 20 transaktioner när man
+        //  trycker på en knapp längst ned i listan. Trycker man igen laddas 20 till, och så vidare.
+
         private readonly ApplicationDbContext _context;
 
         public CustomerModel(ApplicationDbContext context)
