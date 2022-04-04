@@ -18,15 +18,7 @@ namespace BankStartWeb.Services
 
         public string SearchByName(string searchWord)
         {
-            SearchWord = searchWord;
-            var c = _context.Customers.AsQueryable();
-            //Variabel för searchresult
-
-            if (!string.IsNullOrEmpty(SearchWord))
-                c = c.Where(c => c.Givenname.Contains(searchWord)
-                                    || c.Surname.Contains(searchWord)
-                           );
-            return 
+            throw new NotImplementedException();
         }
 
         public int SearchById()
@@ -34,5 +26,9 @@ namespace BankStartWeb.Services
             throw new NotImplementedException();
         }
 
+        public string SearchByName()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

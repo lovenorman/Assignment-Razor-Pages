@@ -1,4 +1,5 @@
 using BankStartWeb.Data;
+using BankStartWeb.Infrastructure.Paging;
 using BankStartWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,13 +9,23 @@ namespace BankStartWeb.Pages
 {
     public class CustomersModel : PageModel
     {
-        private readonly ICustomersService _customersService;
+        private readonly ApplicationDbContext _context;
 
-        public CustomersModel(ICustomersService customersService)
+        public CustomersModel(ApplicationDbContext context)
         {
-            _customersService = customersService;   
+            _context = context;
         }
-       
+
+        public List<CustomersViewModel> CustomersList = new List<CustomersViewModel>();
+
+        public string SortOrder { get; set; }
+        public string SortCol { get; set; }
+        public int PageNo { get; set; }
+
+        public int TotalPageCount { get; set; }
+
+        public string SearchWord { get; set; }
+
         public class CustomersViewModel
         {
             public int Id { get; set; }
@@ -23,20 +34,33 @@ namespace BankStartWeb.Pages
             public string Streetaddress { get; set; }
         }
 
-        public List<CustomersViewModel> CustomersList = new List<CustomersViewModel>();
-
-        public void OnGet(int searchId, string searchWord, string col="id", string order="asc")
+        public void OnGet(string searchWord, string col = "Id", string order = "asc", int pageno = 1)
         {
-            //1. Kalla på metoden SearchByName via _customersService
+            PageNo = pageno;
+            SearchWord = searchWord;
+            SortCol = col;
+            SortOrder = order;
 
+            var c = _context.Customers.AsQueryable();
+
+            //SortByName
+            if (!string.IsNullOrEmpty(SearchWord))
+                c = c.Where(c => c.Givenname.Contains(searchWord)
+                                    || c.Surname.Contains(searchWord)
+                           );
+
+            //OrderBy
+            c = c.OrderBy(col,
+                order == "asc" ? ExtensionMethods.QuerySortOrder.Asc :
+                    ExtensionMethods.QuerySortOrder.Desc);
 
             //SearchId = searchId;
             //var i = _context.Customers.AsQueryable();
 
             //i = i.Where(i => i.Id == searchId);
 
-            var c = _customersService;
-            
+
+
             //if(col ==  "id")
             //{
             //    if (order == "asc")
@@ -66,7 +90,10 @@ namespace BankStartWeb.Pages
             //        c = c.OrderByDescending(ord => ord.Streetaddress);
             //}
 
-            CustomersList = c.Take(50).Select(c =>
+            var pageResult = c.GetPaged(PageNo, 20);
+            TotalPageCount = pageResult.PageCount;
+
+            CustomersList = pageResult.Results.Select(c =>
             new CustomersViewModel
             {
                 Id = c.Id,
