@@ -42,25 +42,25 @@ namespace BankStartWeb.Pages
 
         public void OnGet(int Id)
         {
-            var customer = _context.Customers
-                .Include(c => c.Accounts)
-                .First(c => c.Id == Id);
-            Id = customer.Id;
-            NationalId = customer.NationalId;
-            Givenname = customer.Givenname;
-            Surname = customer.Surname;
-            Streetaddress = customer.Streetaddress;
-            City = customer.City;
-            Zipcode = customer.Zipcode;
-            Country = customer.Country;
-            CountryCode = customer.CountryCode; 
-            TelephoneCountryCode = customer.TelephoneCountryCode;
-            Telephone = customer.Telephone;
-            EmailAddress = customer.EmailAddress;
-            Birthday = customer.Birthday;
-            //AccountBalance = customer.Accounts.
+            //var customer = _context.customers
+            //    .include(c => c.accounts)
+            //    .first(c => c.id == id);
+            //id = customer.id;
+            //nationalid = customer.nationalid;
+            //givenname = customer.givenname;
+            //surname = customer.surname;
+            //streetaddress = customer.streetaddress;
+            //city = customer.city;
+            //zipcode = customer.zipcode;
+            //country = customer.country;
+            //countrycode = customer.countrycode;
+            //telephonecountrycode = customer.telephonecountrycode;
+            //telephone = customer.telephone;
+            //emailaddress = customer.emailaddress;
+            //birthday = customer.birthday;
+            ////accountbalance = customer.accounts.
 
-            CustomerDetails = customer.
+            //customerdetails = customer.
         }
     }
 }

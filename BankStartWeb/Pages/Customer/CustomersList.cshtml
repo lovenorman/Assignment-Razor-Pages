@@ -59,15 +59,15 @@
     @foreach(var customer in Model.CustomersList)
     {
         <tr>    
-            <td><a asp-route-id="@customer.Id" asp-page="/Customer">@customer.Id</a></td>
-            <td><a asp-route-id="@customer.NationalId" asp-page="/Customer">@customer.Id</a></td>
+            <td><a asp-route-id="@customer.Id" asp-page="/CustomerDetails">@customer.Id</a></td>
+            <td><a asp-route-id="@customer.NationalId" asp-page="/CustomerDetails">@customer.NationalId</a></td>
             <td>@customer.Givenname</td>
             <td>@customer.Surname</td>
             <td>@customer.Streetaddress</td>
             <td>@customer.City</td>
         </tr>
         <td>
-            <a asp-page="/Customer" asp-route-Id="@customer.Id">EDIT</a>
+            <a asp-page="/EditCustomer" asp-route-Id="@customer.Id">EDIT</a>
         </td>
     }
 
