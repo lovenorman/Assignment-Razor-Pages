@@ -1,5 +1,5 @@
 ﻿@page
-@model BankStartWeb.Pages.CustomersListModel
+@model BankStartWeb.Pages.Customer.CustomersListModel
 @{
 }
 
@@ -20,54 +20,54 @@
 <table class="table">
     <tr>
         <td>Id
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="id" asp-route-order="asc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="id" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="id" asp-route-order="desc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="id" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>National Id
-            <a asp-page="/Customers" asp-route-searchWord="" asp-route-col="nationalId" asp-route-order="asc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="" asp-route-col="nationalId" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="/Customers" asp-route-searchWord="" asp-route-col="nationalId" asp-route-order="desc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="" asp-route-col="nationalId" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>Given Name
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="givenName" asp-route-order="asc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="givenName" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="givenName" asp-route-order="desc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="givenName" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>Sur Name
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="surName" asp-route-order="asc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="surName" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="surName" asp-route-order="desc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="surName" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>Street Address
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="streetAddress" asp-route-order="asc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="streetAddress" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="streetAddress" asp-route-order="desc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="streetAddress" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>City
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="city" asp-route-order="asc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="city" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="/Customers" asp-route-searchWord="@Model.SearchWord" asp-route-col="city" asp-route-order="desc" >
+            <a asp-page="/CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="city" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
     </tr>
     @foreach(var customer in Model.CustomersList)
     {
         <tr>    
-            <td><a asp-route-id="@customer.Id" asp-page="/CustomerDetails">@customer.Id</a></td>
-            <td><a asp-route-id="@customer.NationalId" asp-page="/CustomerDetails">@customer.NationalId</a></td>
+            <td><a asp-route-id="@customer.Id" asp-page="CustomerDetail">@customer.Id</a></td>
+            <td><a asp-route-id="@customer.NationalId" asp-page="CustomerDetail">@customer.NationalId</a></td>
             <td>@customer.Givenname</td>
             <td>@customer.Surname</td>
             <td>@customer.Streetaddress</td>
             <td>@customer.City</td>
         </tr>
         <td>
-            <a asp-page="/EditCustomer" asp-route-Id="@customer.Id">EDIT</a>
+            <a asp-page="EditCustomer2" asp-route-Id="@customer.Id">EDIT</a>
         </td>
     }
 
@@ -75,14 +75,14 @@
         <td>
             @if (Model.PageNo > 1)
             {
-                <a asp-page="/Customers" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder"  asp-route-searchWord="@Model.SearchWord"   asp-route-pageno="@(Model.PageNo - 1)">Prev</a>
+                <a asp-page="CustomersList" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder"  asp-route-searchWord="@Model.SearchWord"   asp-route-pageno="@(Model.PageNo - 1)">Prev</a>
             }
         </td>
         <td> Visar sidan @Model.PageNo av totalt @Model.TotalPageCount  </td>
         <td>
             @if (Model.PageNo < Model.TotalPageCount)
             {
-                <a asp-page="/Customers" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder" asp-route-searchWord="@Model.SearchWord" asp-route-pageno="@(Model.PageNo + 1)">Next</a>
+                <a asp-page="CustomersList" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder" asp-route-searchWord="@Model.SearchWord" asp-route-pageno="@(Model.PageNo + 1)">Next</a>
             }
         </td>
     </tr>

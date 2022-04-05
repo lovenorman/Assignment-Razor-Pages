@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace BankStartWeb.Pages
+namespace BankStartWeb.Pages.Customer
 {
     //1. En lista ska visas med kundnummer och personnummer, namn, adress, city
     //  som sökresultat.Sökresultatet ska vara paginerat (50 resultat i taget
