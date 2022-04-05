@@ -91,7 +91,6 @@ namespace BankStartWeb.Pages
 
             
             
-            
             //Gamla OrderBy
 
             //if(col ==  "id")

@@ -4,3 +4,32 @@
 }
 
 <h2>@Model.Givenname @Model.Surname</h2>
+
+<table class="table">
+    <tr>
+        <td>Id
+            @Model.Id
+        </td>
+        <td>National Id
+            @Model.NationalId
+        </td>
+        <td>Given Name
+            @Model.Givenname
+        </td>
+        <td>Sur Name
+            @Model.Surname
+        </td>
+        <td>Street Address
+            @Model.Streetaddress
+        </td>
+        <td>City
+            @Model.City
+        </td>
+        <td>Balance
+            @*@foreach(var account Model.Accounts)
+            {
+                
+            }*@
+        </td>
+
+    </tr>

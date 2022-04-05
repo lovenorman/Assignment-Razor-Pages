@@ -1,6 +1,7 @@
 using BankStartWeb.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages
 {
@@ -19,11 +20,10 @@ namespace BankStartWeb.Pages
         {
             _context = context;
         }
-
+        public int Id { get; set; }
         public string Givenname { get; set; }
         public string Surname { get; set; }
         public string Streetaddress { get; set; }
-        
         public string City { get; set; }
         public string Zipcode { get; set; }
         public string Country { get; set; }
@@ -33,20 +33,34 @@ namespace BankStartWeb.Pages
         public string Telephone { get; set; }
         public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
+        public List<AccountDetailViewModel> AccountRows { get; set; }
 
-        //public List<Account> Accounts { get; set; } = new List<Account>();
-        
+        public class AccountDetailViewModel
+        {
+            public decimal Balance { get; set; }
+        }
+
         public void OnGet(int Id)
         {
-            var customer = _context.Customers.First(c => c.Id == Id);
+            var customer = _context.Customers
+                .Include(c => c.Accounts)
+                .First(c => c.Id == Id);
+            Id = customer.Id;
+            NationalId = customer.NationalId;
             Givenname = customer.Givenname;
             Surname = customer.Surname;
             Streetaddress = customer.Streetaddress;
             City = customer.City;
             Zipcode = customer.Zipcode;
             Country = customer.Country;
-            CountryCode = customer.CountryCode;
-            NationalId = customer.NationalId;
+            CountryCode = customer.CountryCode; 
+            TelephoneCountryCode = customer.TelephoneCountryCode;
+            Telephone = customer.Telephone;
+            EmailAddress = customer.EmailAddress;
+            Birthday = customer.Birthday;
+            //AccountBalance = customer.Accounts.
+
+            CustomerDetails = customer.
         }
     }
 }
