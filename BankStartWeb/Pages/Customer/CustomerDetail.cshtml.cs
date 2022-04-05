@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages
 {
-    public class CustomerModel : PageModel
+    public class CustomerDetailModel : PageModel
     {
         //1. Visar kontonummer och saldo samt en lista med transaktioner i
         //  descending order.
@@ -16,7 +16,7 @@ namespace BankStartWeb.Pages
 
         private readonly ApplicationDbContext _context;
 
-        public CustomerModel(ApplicationDbContext context)
+        public CustomerDetailModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -42,25 +42,24 @@ namespace BankStartWeb.Pages
 
         public void OnGet(int Id)
         {
-            //var customer = _context.customers
-            //    .include(c => c.accounts)
-            //    .first(c => c.id == id);
-            //id = customer.id;
-            //nationalid = customer.nationalid;
-            //givenname = customer.givenname;
-            //surname = customer.surname;
-            //streetaddress = customer.streetaddress;
-            //city = customer.city;
-            //zipcode = customer.zipcode;
-            //country = customer.country;
-            //countrycode = customer.countrycode;
-            //telephonecountrycode = customer.telephonecountrycode;
-            //telephone = customer.telephone;
-            //emailaddress = customer.emailaddress;
-            //birthday = customer.birthday;
-            ////accountbalance = customer.accounts.
+            var customer = _context.Customers
+                .Include(c => c.Accounts)
+                .First(c => c.Id == Id);
+            Id = customer.Id;
+            NationalId = customer.NationalId;
+            Givenname = customer.Givenname; 
+            Surname = customer.Surname;
+            Streetaddress = customer.Streetaddress; 
+            City = customer.City;
+            Zipcode = customer.Zipcode;
+            Country = customer.Country;
+            CountryCode = customer.CountryCode;
+            TelephoneCountryCode = customer.TelephoneCountryCode;
+            Telephone = customer.Telephone;
+            EmailAddress = customer.EmailAddress;
+            Birthday = customer.Birthday;
+            //accountbalance = customer.accounts.
 
-            //customerdetails = customer.
         }
     }
 }

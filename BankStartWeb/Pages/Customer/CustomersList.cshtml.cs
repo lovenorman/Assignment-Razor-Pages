@@ -13,11 +13,11 @@ namespace BankStartWeb.Pages
     //2.  Klickar man på en kund ska man komma till kundbilden.
 
 
-    public class CustomersModel : PageModel
+    public class CustomersListModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomersModel(ApplicationDbContext context)
+        public CustomersListModel(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -24,7 +24,7 @@ namespace BankStartWeb.Pages.Customer
         public void OnGet(int Id)
         {
             //Set properties from DB
-            var customer = _context.Customers
+            //var customer = _context.Customers
         }
     }
 }
