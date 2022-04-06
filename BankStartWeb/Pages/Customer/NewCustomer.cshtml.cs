@@ -22,9 +22,9 @@ namespace BankStartWeb.Pages.Customer
         public string Country { get; set; }
         public string CountryCode { get; set; }
         public string NationalId { get; set; }
+        public int TelephoneCountryCode { get; set; }
 
         [Range(0, 10, ErrorMessage = "9 siffror max")]
-        public int TelephoneCountryCode { get; set; }
         public string Telephone { get; set; }
         public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
