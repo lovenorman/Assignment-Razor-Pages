@@ -25,11 +25,15 @@
         <td>City
             @Model.City
         </td>
-        <td>Balance
-            @*@foreach(var account Model.Accounts)
+        <td>Accounts
+            @foreach(var account in Model.AccountRows)
             {
-                
-            }*@
+                <tr>
+                    <td>@account.AccountType</td>
+                    <td>@account.Balance</td>
+                </tr>
+            }
         </td>
 
     </tr>
+</table>

@@ -37,6 +37,7 @@ namespace BankStartWeb.Pages.Customer
 
         public class AccountDetailViewModel
         {
+            public string AccountType { get; set; }
             public decimal Balance { get; set; }
         }
 
@@ -58,8 +59,12 @@ namespace BankStartWeb.Pages.Customer
             Telephone = customer.Telephone;
             EmailAddress = customer.EmailAddress;
             Birthday = customer.Birthday;
-            //accountbalance = customer.accounts.
 
+            AccountRows = customer.Accounts.Select(c => new AccountDetailViewModel
+            {
+                AccountType = c.AccountType,
+                Balance = c.Balance,
+            }).ToList();
         }
     }
 }
