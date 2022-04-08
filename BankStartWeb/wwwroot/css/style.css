@@ -1490,8 +1490,8 @@ a:focus {
   opacity: 1;
 }
 
-.table{
-    margin: 40px;
+tbody{
+    margin: 100px;
 }
 
 
