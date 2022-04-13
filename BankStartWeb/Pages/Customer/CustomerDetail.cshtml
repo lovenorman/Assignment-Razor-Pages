@@ -7,33 +7,36 @@
 
 <table class="table">
     <tr>
-        <td>Id
-            @Model.Id
-        </td>
-        <td>National Id
-            @Model.NationalId
-        </td>
-        <td>Given Name
-            @Model.Givenname
-        </td>
-        <td>Sur Name
-            @Model.Surname
-        </td>
-        <td>Street Address
-            @Model.Streetaddress
-        </td>
-        <td>City
-            @Model.City
-        </td>
-        <td>Accounts
-            @foreach(var account in Model.AccountRows)
-            {
-                <tr>
-                    <td>@account.AccountType</td>
-                    <td>@account.Balance</td>
-                </tr>
-            }
-        </td>
-
+        <td>Id</td>
+        <td>National Id</td>
+        <td>Given Name</td>
+        <td>Sur Name</td>
+        <td>Street Address</td>
+        <td>City</td>
     </tr>
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.NationalId</td>
+        <td>@Model.Givenname</td>
+        <td>@Model.Surname</td>
+        <td>@Model.Streetaddress</td>
+        <td>@Model.City</td>
+    </tr>
+
+    <div>
+        <table class="table">
+            <tr><h3>Accounts</h3></tr>
+            <td>@foreach(var account in Model.AccountRows)
+                {
+                    <td>@account.AccountType</td>
+                    <td>
+                        @account.Balance
+                        <a asp-page="AccountDetails" asp-route-Id="@account.Id">Details</a>
+                        <a asp-page="Withdrawal" asp-route-Id="@account.Id">Withdrawal</a>
+                        <a asp-page="Deposit" asp-route-Id="@account.Id">Deposit</a>
+                    </td>
+                }
+             </td>
+        </table>
+    </div>
 </table>

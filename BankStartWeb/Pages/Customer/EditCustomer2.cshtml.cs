@@ -1,9 +1,11 @@
 using BankStartWeb.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BankStartWeb.Pages.Customer
 {
+    [Authorize(Roles = "Admin, Cashier")]
     public class EditCustomer2Model : PageModel
     {
         private readonly ApplicationDbContext _context;

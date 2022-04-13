@@ -1,0 +1,16 @@
+﻿@page
+@model BankStartWeb.Pages.Customer.DepositModel
+@{
+}
+
+<h3>Deposit</h3>
+
+<form method="post">
+    <div>
+        <label asp-for="Amount">Amount</label>
+        <input class="form-control" asp-for="Amount"/>
+        <span asp-validation-for="Amount" class="field-validation-error"></span>
+    </div>
+    <button type="submit" class="btn">Save</button>
+</form>
+

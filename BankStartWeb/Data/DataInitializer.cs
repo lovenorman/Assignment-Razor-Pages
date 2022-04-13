@@ -22,6 +22,42 @@ public class DataInitializer
     {
         _dbContext.Database.Migrate();
         SeedCustomers();
+        SeedRoles();
+        SeedUser();
+    }
+
+    private void SeedUser()//Log In for my teacher. 
+    {
+        CreateUserIfNotExist("stefan@banken.se", "Hejsan123456#",
+            new[] { "Admin", "Cashier" });
+    }
+
+    private void CreateUserIfNotExist(string email, string password, string[] roles)
+    {
+        if (_userManager.FindByEmailAsync(email).Result != null) return;//If email is not null
+
+        var user = new IdentityUser//create new user:
+        {
+            UserName = email,
+            Email = email,
+            EmailConfirmed = true
+        };
+        _userManager.CreateAsync(user, password).Wait(); //If not, 
+        _userManager.AddToRolesAsync(user, roles).Wait();
+    }   
+
+    private void SeedRoles()
+    {
+        CreateRoleIfNotExists("Admin");
+        CreateRoleIfNotExists("Cashier");
+    }
+
+    private void CreateRoleIfNotExists(string roleName)
+    {
+        if (_dbContext.Roles.Any(n => n.Name == roleName)) //If the role already exists, return
+            return;
+        _dbContext.Roles.Add(new IdentityRole { Name=roleName, NormalizedName=roleName});//If not, create new
+        _dbContext.SaveChanges();
     }
 
     private void SeedCustomers()
