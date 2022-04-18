@@ -18,20 +18,27 @@ namespace BankStartWeb.Pages.Customer
         }
 
         [Range(1, 5000)]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
+        public string Type { get; set; }
 
         public void OnGet(int Id)
         {
-            //Amount =
+
         }
 
-        public IActionResult OnPost(int Id)
+        public IActionResult OnPost(int Id, decimal Amount, string Type)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var status = _accountService.Withdrawal(Id, Amount);
-
+                var status = _accountService.Withdraw(Id, Amount, Type);
+                if (status == IAccountService.ErrorCode.Ok)
+                {
+                    return RedirectToPage("AccountDetails");
+                }
+                ModelState.AddModelError("Amount", "Beloppet är fel");
             }
+
+            return Page();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace BankStartWeb.Pages.Customer
 
         public int Balance { get; set; }
 
-        public void OnGet(int Amount)
+        public void OnGet(int id)
         {
             
         }

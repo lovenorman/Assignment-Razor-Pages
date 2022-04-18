@@ -97,7 +97,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   font-family: "Exo", sans-serif;
   text-transform: uppercase;
   border-radius: 5px;
-  border: 2px solid transparent;
+  border: 2px solid black;
   transition: all .35s ease;
 }
 
@@ -112,16 +112,17 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 }
 
 .btn-main {
-  background: #223a66;
-  color: #fff;
-  border-color: #223a66;
+    background: #223a66;
+    color: #fff;
+    border-color: #223a66;
 }
 
-.btn-main:hover {
-  background: #e12454;
-  border-color: #e12454;
-  color: #fff;
-}
+    .btn-main:hover {
+        background: #e12454;
+        border-color: #e12454;
+        color: #fff;
+        font-family: "Exo", sans-serif;
+    }
 
 .btn-main-2 {
   background: #e12454;
@@ -136,15 +137,19 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
 }
 
 .btn-solid-border {
-  border: 2px solid #223a66;
-  background: transparent;
-  color: #223a66;
+    border: 2px solid #223a66;
+    background: transparent;
+    color: #223a66;
+    border-radius: 5px;
+    padding: 3px;
+    font-family: "Exo", sans-serif;
 }
 
 .btn-solid-border:hover {
   border: 2px solid #223a66;
   color: #fff;
   background: #223a66;
+  
 }
 
 .btn-solid-border:hover.btn-icon i {
@@ -1498,6 +1503,10 @@ a:focus {
 
 form{
     align-content:center;
+}
+
+.td{
+   justify-content: space-around;
 }
 
 

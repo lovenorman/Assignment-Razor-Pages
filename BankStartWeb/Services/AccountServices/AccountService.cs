@@ -10,23 +10,37 @@ namespace BankStartWeb.Services
         {
             _context = context;
         }
-        public int Id { get; set; }
-        public int Amount { get; set; }
 
-        public int Deposit(int Id, int amount)
+        public IAccountService.ErrorCode Withdraw(int accountId, decimal Amount, string Type)
         {
-            throw new NotImplementedException();
+            var account = _context.Accounts.First(a => a.Id == accountId);
+
+            if(account.Balance < Amount)
+            {
+                return IAccountService.ErrorCode.BalanceIsTooLow;
+            }
+
+            else if(Amount < 0)
+            {
+                return IAccountService.ErrorCode.AmountIsNegative;
+            }
+
+            account.Balance -= Amount;
+
+            var transaction = new Transaction();
+            {
+                transaction.Type = Type;
+                transaction.Operation = "Withdrawal";
+                transaction.Date = DateTime.UtcNow;
+                transaction.Amount = Amount;
+                transaction.NewBalance = account.Balance;
+            }
+
+            _context.Transactions.Add(transaction);
+            _context.SaveChanges();
+
+            return IAccountService.ErrorCode.Ok;
         }
 
-        public int Withdrawal(int Id, int amount)
-        {
-            //if (_context.Accounts.Balance < amount)
-            //{
-            //    ModelState.AddModelError(nameof(amount), "To big amount");
-            //    return Page();
-            //}
-            //return Page();
-            throw new NotImplementedException();
-        }
     }
 }

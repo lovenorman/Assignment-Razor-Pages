@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Content Remove="Pages\Customer\Deposit.cshtml" />
-    <Content Remove="Pages\Customer\Withdrawal.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,16 +35,10 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Customer\Deposit.cshtml" />
-    <_ContentIncludedByDefault Remove="Pages\Customer\Withdrawal.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Pages\Customer\Deposit.cshtml" />
-    <None Include="Pages\Customer\Withdrawal.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Customer\Withdrawal.cshtml" />
   </ItemGroup>
 
 </Project>

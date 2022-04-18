@@ -5,21 +5,54 @@
 
 <h2>Transactions from @Model.AccountType</h2>
 
-<table class="table">
+<div>
+    <table class="table" id="posts-table">
     <tr>
        <td>Type</td>
        <td>Operation</td>
        <td>Date</td>
        <td>Amount</td>
     </tr>
+    <tbody>
+    </tbody>
+   
+    </table>
 
-    @foreach(var transaction in Model.TransactionList)
-    {
-        <tr>
-            <td>@transaction.Type</td>
-            <td>@transaction.Operation</td>
-            <td>@transaction.Date</td>
-            <td>@transaction.Amount</td>
-        </tr>
-    }
-</table>
+    <a class="btn" href="javascript:fetchMore();">See more</a>
+
+</div>
+
+@section Scripts
+{
+    <script>
+        pageNumber = 1;//Start at page 1
+        function fetchMore() {  //fetchMore() contains fetch()
+            fetch("AccountDetails?handler=FetchMore&pageNumber=" + pageNumber + "&id=@Model.Id")//needs url, pageNumber, Id
+                .then((response) => response.json())//
+                .then((json) => {
+                    pageNumber = pageNumber + 1;
+                    json.items.forEach(tableElements);
+                    }
+                );
+        }
+
+        function tableElements(element) {
+           
+            document.querySelector('#posts-table tbody').innerHTML +=
+                `<tr>
+            <td>${element.type}</td>
+            <td>${element.operation}</td>
+            <td>${element.date}</td>
+            <td>${element.amount}</td>
+        </tr>`;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchMore();
+        });
+    
+    </script>
+}
+
+
+

@@ -34,6 +34,8 @@ namespace BankStartWeb.Pages.User
         public void OnGet()
         {
         }
+
+
         
     }
 }

@@ -4,9 +4,13 @@ namespace BankStartWeb.Services
 {
     public interface IAccountService
     {
-        public int Withdrawal(int Id, int amount);
+        public enum ErrorCode
+        {
+            Ok,
+            BalanceIsTooLow,
+            AmountIsNegative,
+        }
 
-        public int Deposit(int Id, int amount);
-
+        ErrorCode Withdraw(int Id, decimal Amount, string Type);
     }
 }

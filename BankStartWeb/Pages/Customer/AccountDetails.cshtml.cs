@@ -1,4 +1,5 @@
 using BankStartWeb.Data;
+using BankStartWeb.Infrastructure.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -31,7 +32,7 @@ namespace BankStartWeb.Pages.Customer
         public DateTime Created { get; set; }
         public decimal Balance { get; set; }
 
-        public List<Transactions> TransactionList { get; set; }
+        //public List<Transactions> TransactionList { get; set; }
 
         public class Transactions
         {
@@ -42,24 +43,38 @@ namespace BankStartWeb.Pages.Customer
             public decimal Amount { get; set; }
         }
 
-        public void OnGet(int Id)
+        public void OnGet(int id)
         {
             var account = _context.Accounts
                 .Include(a => a.Transactions)
-                .First(a => a.Id == Id);
+                .First(a => a.Id == id);
             Id = account.Id;
             AccountType = account.AccountType;
             Created = account.Created;  
             Balance = account.Balance;
 
-            TransactionList = account.Transactions.Select(t => new Transactions
+           
+        }
+
+        public IActionResult OnGetFetchMore(int id, int pageNumber)
+        {
+            var query = _context.Accounts.Where(a => a.Id == id)
+                .SelectMany(a => a.Transactions);
+
+            var pageResult = query.GetPaged(pageNumber, 5);
+
+            var list = pageResult.Results.Select(i => new Transactions
             {
-                Id = t.Id,
-                Type = t.Type,
-                Operation = t.Operation,
-                Date = t.Date,
-                Amount = t.Amount,
+                Id = i.Id,
+                Type = i.Type,
+                Operation = i.Operation,
+                Date = i.Date,
+                Amount = i.Amount,
             }).ToList();
+
+            bool lastPage = pageNumber == pageResult.PageCount;
+
+            return new JsonResult(new {items = list, lastPage = lastPage});
         }
     }
 }
