@@ -1,6 +1,7 @@
 using BankStartWeb.Data;
 using BankStartWeb.Infrastructure.Paging;
 using BankStartWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ namespace BankStartWeb.Pages.Customer
     //  och så ska man kunna bläddra till nästa/tidigare sida).
     //2.  Klickar man på en kund ska man komma till kundbilden.
 
-
+    [Authorize(Roles = "Admin, Cashier")]
     public class CustomersListModel : PageModel
     {
         private readonly ApplicationDbContext _context;

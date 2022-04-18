@@ -1,10 +1,12 @@
 using BankStartWeb.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
 namespace BankStartWeb.Pages.Customer
 {
+    [Authorize(Roles = "Admin, Cashier")]
     [BindProperties]
     public class NewCustomerModel : PageModel
     {

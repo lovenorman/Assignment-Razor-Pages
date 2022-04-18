@@ -1,18 +1,21 @@
 using BankStartWeb.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace BankStartWeb.Pages.Customer
 {
+    [Authorize(Roles = "Admin, Cashier")]
+    [BindProperties]
     public class CustomerDetailModel : PageModel
     {
-        //1. Visar kontonummer och saldo samt en lista med transaktioner i
-        //  descending order.
-
-        //2. Om det finns fler än 20 transaktioner ska JavaScript/AJAX
-        //  användas för att ladda in ytterligare 20 transaktioner när man
-        //  trycker på en knapp längst ned i listan. Trycker man igen laddas 20 till, och så vidare.
+        //1. Det ska gå att ta fram en kundbild genom att ange kundnummer.
+        //2. Kundbilden ska visa all information om kunden och alla kundens konton.
+        //3. Kundbilden ska också visa det totala saldot för kunden genom att
+        //   summera saldot på kundens konton.
+        //4. Genom attt klicka på ett kontonummer ska man komma vidare till
+        //   en kontosida.
 
         private readonly ApplicationDbContext _context;
 
@@ -37,6 +40,7 @@ namespace BankStartWeb.Pages.Customer
 
         public class AccountDetailViewModel
         {
+            public int Id { get; set; }
             public string AccountType { get; set; }
             public decimal Balance { get; set; }
         }
@@ -62,6 +66,7 @@ namespace BankStartWeb.Pages.Customer
 
             AccountRows = customer.Accounts.Select(c => new AccountDetailViewModel
             {
+                Id = c.Id,
                 AccountType = c.AccountType,
                 Balance = c.Balance,
             }).ToList();
