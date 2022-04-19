@@ -62,7 +62,7 @@ public class DataInitializer
 
     private void SeedCustomers()
     {
-        while (_dbContext.Customers.Count() < 500)
+        while (_dbContext.Customers.Count() < 100)
         {
             var a =
                 GenerateCustomer();

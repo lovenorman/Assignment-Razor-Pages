@@ -5,13 +5,14 @@
 
 
 
-@*<form method="GET">
-    <label>Search by id</label>
-    <input asp-for="@Model.SearchId"/>
-    <input type="submit" value="Search" />
-</form>*@
+
 <div class="table">
     <h1>All Customers</h1>
+    <form method="GET">
+        <label>Search by id</label>
+        <input asp-for="@Model.SearchId"/>
+        <input type="submit" value="Search" />
+    </form>
 
     <form method="GET">
         <label>Search by name or city</label>
