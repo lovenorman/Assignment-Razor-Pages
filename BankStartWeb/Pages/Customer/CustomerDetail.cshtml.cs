@@ -37,6 +37,7 @@ namespace BankStartWeb.Pages.Customer
         public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
         public List<AccountDetailViewModel> AccountRows { get; set; }
+        public int TotalBalance { get; set; }
 
         public class AccountDetailViewModel
         {
@@ -70,6 +71,9 @@ namespace BankStartWeb.Pages.Customer
                 AccountType = c.AccountType,
                 Balance = c.Balance,
             }).ToList();
+
+            TotalBalance = (int)customer.Accounts.Sum(x => x.Balance);
+            
         }
     }
 }

@@ -54,18 +54,15 @@ namespace BankStartWeb.Pages.Customer
 
             //Search (name or city)
             if (!string.IsNullOrEmpty(SearchWord))
-            {
                 c = c.Where(c => c.Givenname.Contains(searchWord)
-                                    || c.Surname.Contains(searchWord)
-                                    || c.City.Contains(searchWord)
-                           );
-            }
+                                        || c.Surname.Contains(searchWord)
+                                        || c.City.Contains(searchWord)
+                               );
 
             //Search by NationalId
             if (!string.IsNullOrEmpty(searchId))
                 c = c.Where(c => c.NationalId.Contains(searchId)
                             );
-                       
 
             //OrderBy
             c = c.OrderBy(col,
