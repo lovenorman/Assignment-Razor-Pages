@@ -36,7 +36,8 @@ namespace BankStartWeb.Services
                 transaction.NewBalance = account.Balance;
             }
 
-            _context.Transactions.Add(transaction);
+            account.Transactions.Add(transaction);
+            //_context.Transactions.Add(transaction);
             _context.SaveChanges();
 
             return IAccountService.ErrorCode.Ok;

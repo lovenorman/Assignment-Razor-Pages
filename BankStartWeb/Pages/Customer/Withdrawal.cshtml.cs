@@ -33,7 +33,7 @@ namespace BankStartWeb.Pages.Customer
                 var status = _accountService.Withdraw(Id, Amount, Type);
                 if (status == IAccountService.ErrorCode.Ok)
                 {
-                    return RedirectToPage("AccountDetails");
+                    return RedirectToPage("AccountDetails", new { id = Id });
                 }
                 ModelState.AddModelError("Amount", "Beloppet är fel");
             }
