@@ -39,7 +39,7 @@ namespace BankStartWeb.Pages.Customer
             public int Id { get; set; }
             public string Type { get; set; }
             public string Operation { get; set; }
-            public DateTime Date { get; set; }
+            public string Date { get; set; }
             public decimal Amount { get; set; }
         }
 
@@ -68,7 +68,7 @@ namespace BankStartWeb.Pages.Customer
                 Id = i.Id,
                 Type = i.Type,
                 Operation = i.Operation,
-                Date = i.Date,
+                Date = i.Date.ToString("yy-mm-dd HH:Gmm"),
                 Amount = i.Amount,
             }).ToList();
 

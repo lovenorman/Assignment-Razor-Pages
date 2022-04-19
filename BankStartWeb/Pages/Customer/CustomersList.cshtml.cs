@@ -28,10 +28,9 @@ namespace BankStartWeb.Pages.Customer
         public string SortOrder { get; set; }
         public string SortCol { get; set; }
         public int PageNo { get; set; }
-
         public int TotalPageCount { get; set; }
-
         public string SearchWord { get; set; }
+        public string SearchId { get; set; }
 
         public class CustomersViewModel
         {
@@ -43,21 +42,30 @@ namespace BankStartWeb.Pages.Customer
             public string City { get; set; }
         }
 
-        public void OnGet(string searchWord, string col = "Id", string order = "asc", int pageno = 1)
+        public void OnGet(string searchWord, string searchId, string col = "Id", string order = "asc", int pageno = 1)
         {
             PageNo = pageno;
             SearchWord = searchWord;
             SortCol = col;
             SortOrder = order;
+            SearchId = searchId;
 
             var c = _context.Customers.AsQueryable();
 
-            //Search (nam el stad)
+            //Search (name or city)
             if (!string.IsNullOrEmpty(SearchWord))
+            {
                 c = c.Where(c => c.Givenname.Contains(searchWord)
                                     || c.Surname.Contains(searchWord)
                                     || c.City.Contains(searchWord)
                            );
+            }
+
+            //Search by NationalId
+            if (!string.IsNullOrEmpty(searchId))
+                c = c.Where(c => c.NationalId.Contains(searchId)
+                            );
+                       
 
             //OrderBy
             c = c.OrderBy(col,
