@@ -8,21 +8,24 @@
 
 <div class="table">
     <h1>All Customers</h1>
-    <form method="GET">
+    <div>
+        <a class="btn-solid-border" asp-page="NewCustomer">Create new</a>
+    </div>
+    </div>
+    <div>
+        <form method="GET">
         <label>Search by id</label>
         <input asp-for="@Model.SearchId"/>
         <input type="submit" value="Search" />
     </form>
-
-    <form method="GET">
+    </div>
+    <div>
+        <form method="GET">
         <label>Search by name or city</label>
         <input asp-for="@Model.SearchWord"/>
         <input type="submit" value="Search" />
-    </form><br />
-
-    <a class="btn-solid-border" asp-page="NewCustomer">Create new</a><br /><br />
-</div>
-
+    </form>
+    </div>
 
 <table class="table">
     <tr>

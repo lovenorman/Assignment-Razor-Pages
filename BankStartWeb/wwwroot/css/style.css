@@ -99,6 +99,7 @@ input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focu
   border-radius: 5px;
   border: 2px solid black;
   transition: all .35s ease;
+  margin: 5px; 
 }
 
 .btn.btn-icon i {
