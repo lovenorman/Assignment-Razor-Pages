@@ -14,5 +14,7 @@ namespace BankStartWeb.Services
         ErrorCode Withdraw(int Id, decimal Amount, string Type);
 
         ErrorCode Deposit(int Id, decimal Amount, string Type);
+
+        ErrorCode Transfer(int Id, decimal Amount, string Type);
     }
 }

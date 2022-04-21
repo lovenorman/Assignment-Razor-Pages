@@ -13,16 +13,16 @@ namespace BankStartWeb.Services
 
         public IAccountService.ErrorCode Withdraw(int accountId, decimal Amount, string Type)
         {
-            var account = _context.Accounts.First(a => a.Id == accountId);
-
-            if(account.Balance < Amount)
-            {
-                return IAccountService.ErrorCode.BalanceIsTooLow;
-            }
-
-            else if(Amount < 0)
+            if(Amount < 0)
             {
                 return IAccountService.ErrorCode.AmountIsNegative;
+            }
+
+            var account = _context.Accounts.First(a => a.Id == accountId);
+
+            if (account.Balance < Amount)
+            {
+                return IAccountService.ErrorCode.BalanceIsTooLow;
             }
 
             account.Balance -= Amount;
@@ -44,12 +44,12 @@ namespace BankStartWeb.Services
 
         public IAccountService.ErrorCode Deposit(int accountId, decimal Amount, string Type)
         {
-            var account = _context.Accounts.First(a => a.Id == accountId);
-
             if (Amount < 0)
             {
                 return IAccountService.ErrorCode.AmountIsNegative;
             }
+
+            var account = _context.Accounts.First(a => a.Id == accountId);
 
             account.Balance += Amount;
 
@@ -68,5 +68,16 @@ namespace BankStartWeb.Services
             return IAccountService.ErrorCode.Ok;
         }
 
+        public IAccountService.ErrorCode Transfer(int fromAccountId, int toAccountId, decimal Amount, string Type)
+        {
+            if (Amount < 0)
+            {
+                return IAccountService.ErrorCode.AmountIsNegative;
+            }
+
+            var fromAccount = _context.Accounts.First(a => a.Id == fromAccountId);
+            var toAccount = _context.Accounts.First(b => b.Id == toAccountId);
+
+        }
     }
 }
