@@ -31,14 +31,14 @@ namespace BankStartWeb.Pages.Customer
             AccountType = account.AccountType;
         }
 
-        public IActionResult OnPost(int Id, decimal Amount, string Type)
+        public IActionResult OnPost(int id, decimal amount)
         {
             if (ModelState.IsValid)
             {
-                var status = _accountService.Deposit(Id, Amount, Type);
+                var status = _accountService.Deposit(id, amount);
                 if (status == IAccountService.ErrorCode.Ok)
                 {
-                    return RedirectToPage("AccountDetails", new { id = Id });
+                    return RedirectToPage("AccountDetails", new { id = id });
                 }
                 ModelState.AddModelError("Amount", "Beloppet är fel");
             }
