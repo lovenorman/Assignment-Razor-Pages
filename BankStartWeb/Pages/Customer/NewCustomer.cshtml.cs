@@ -51,6 +51,7 @@ namespace BankStartWeb.Pages.Customer
                 newCustomer.TelephoneCountryCode = TelephoneCountryCode;
                 newCustomer.Telephone = Telephone;
                 newCustomer.EmailAddress = EmailAddress;
+                newCustomer.Birthday = Birthday;
 
                 _context.Customers.Add(newCustomer);
                 _context.SaveChanges();
