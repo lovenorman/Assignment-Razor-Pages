@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\Customer\Deposit.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.1" />
     <PackageReference Include="Faker.Net" Version="2.0.154" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.0" />
@@ -27,18 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\Validation\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Customer\Deposit.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Customer\Deposit.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Customer\Deposit.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -26,11 +26,11 @@ namespace BankStartWeb.Pages.Customer
 
         }
 
-        public IActionResult OnPost(int Id, decimal Amount, string Type)
+        public IActionResult OnPost(int Id, decimal Amount)
         {
             if (ModelState.IsValid)
             {
-                var status = _accountService.Withdraw(Id, Amount, Type);
+                var status = _accountService.Withdraw(Id, Amount);
                 if (status == IAccountService.ErrorCode.Ok)
                 {
                     return RedirectToPage("AccountDetails", new { id = Id });

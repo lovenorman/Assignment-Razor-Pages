@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace BankStartWeb.Pages.Customer
 {
     [Authorize(Roles = "Admin, Cashier")]
-    public class EditCustomer2Model : PageModel
+    public class EditCustomerModel : PageModel
     {
         private readonly ApplicationDbContext _context;
         
-        public EditCustomer2Model(ApplicationDbContext context)
+        public EditCustomerModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -29,18 +29,19 @@ namespace BankStartWeb.Pages.Customer
             Streetaddress = customer.Streetaddress;
         }
 
-        public IActionResult OnPost(int Id)
+        public IActionResult OnPost(int id)
         {
             if (ModelState.IsValid)
             {
-                var customer = _context.Customers.First(e => e.Id == Id);
+                var customer = _context.Customers.First(e => e.Id == id);
                 customer.Givenname = Givenname;
                 customer.Surname = Surname;
                 customer.Streetaddress = Streetaddress;
 
                 _context.SaveChanges();
 
-                return RedirectToPage();
+                return RedirectToPage("CustomersDetail", new { id = id });
+
             }
             return Page();
         }

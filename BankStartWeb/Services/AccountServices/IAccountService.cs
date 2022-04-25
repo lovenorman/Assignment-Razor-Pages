@@ -11,6 +11,10 @@ namespace BankStartWeb.Services
             AmountIsNegative,
         }
 
-        ErrorCode Withdraw(int Id, decimal Amount, string Type);
+        ErrorCode Withdraw(int Id, decimal Amount);
+
+        ErrorCode Deposit(int Id, decimal Amount);
+
+        ErrorCode Transfer(int fromAccountId, int toAccountId, decimal amount);
     }
 }

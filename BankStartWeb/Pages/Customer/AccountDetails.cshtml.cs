@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BankStartWeb.Pages.Customer
 {
@@ -31,8 +32,7 @@ namespace BankStartWeb.Pages.Customer
         public string AccountType { get; set; }
         public DateTime Created { get; set; }
         public decimal Balance { get; set; }
-
-        //public List<Transactions> TransactionList { get; set; }
+        public int TotalBalance { get; set; }
 
         public class Transactions
         {
@@ -53,7 +53,11 @@ namespace BankStartWeb.Pages.Customer
             Created = account.Created;  
             Balance = account.Balance;
 
-           
+            var customer = _context.Customers
+                .Include(c => c.Accounts)
+                .First(c => c.Id == id);
+
+            TotalBalance = (int)customer.Accounts.Sum(x => x.Balance);
         }
 
         public IActionResult OnGetFetchMore(int id, int pageNumber)
@@ -68,7 +72,7 @@ namespace BankStartWeb.Pages.Customer
                 Id = i.Id,
                 Type = i.Type,
                 Operation = i.Operation,
-                Date = i.Date.ToString("yy-mm-dd HH:Gmm"),
+                Date = i.Date.ToString("yy-M-d H:m"),
                 Amount = i.Amount,
             }).ToList();
 
