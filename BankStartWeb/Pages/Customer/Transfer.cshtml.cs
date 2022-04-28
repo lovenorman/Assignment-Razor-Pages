@@ -3,6 +3,7 @@ using BankStartWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace BankStartWeb.Pages.Customer
@@ -18,31 +19,29 @@ namespace BankStartWeb.Pages.Customer
             _accountService = accountService;
         }
 
-        [Range(1, 5000)]
-        public string AccountId { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int customerId { get; set; }
         public decimal Amount { get; set; }
-        public string Type { get; set; }
+        [BindProperty]
         public string FromAccount { get; set; }
+        [BindProperty]
         public string ToAccount { get; set; }
 
         public List<SelectListItem> AllAccounts { get; set; }
 
-        public void OnGet(int Id)
+        public void OnGet()
         {
-            SetAllLists();
+            SetAllAccounts(customerId);
         }
 
-        private void SetAllLists()
+        public void SetAllAccounts(int customerId)
         {
-            SetAllAccounts();
-        }
-
-        public void SetAllAccounts()
-        {
-            AllAccounts = _context //Jag vill komma åt de konyton som tillhör specifik kund
-                .Accounts.Select(account => new SelectListItem
+            //Hämtar kund och include alla konton hos kunden som matchar id(anger mapp som typ pga 2 "customer" som filnamn
+            Data.Customer customer = _context.Customers.Include(e => e.Accounts).FirstOrDefault(e => e.Id == customerId); //Jag vill komma åt de konton som tillhör specifik kund
+            //Hämtar alla konton hos kund
+            AllAccounts = customer.Accounts.Select(account => new SelectListItem
             {
-                Text = account.AccountType,
+                Text = account.AccountType + " " + account.Balance,
                 Value = account.Id.ToString()
             }).ToList();
 
@@ -65,11 +64,10 @@ namespace BankStartWeb.Pages.Customer
                 ModelState.AddModelError("Amount", "Beloppet är fel");
 
                 return Page();
-
             }
 
             //Ritar om formuläret med fel
-            SetAllLists();
+            //SetAllAccounts();
 
             return Page();
         }

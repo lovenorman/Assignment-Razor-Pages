@@ -5,6 +5,10 @@
 
 <h2>@Model.Givenname @Model.Surname</h2>
 
+<div>
+    <a class="btn-main, btn-solid-border" asp-page="EditCustomer" asp-route-Id="@Model.Id">EDIT</a>
+</div>
+
 <table class="table">
     <tr>
         <td>Id</td>
@@ -13,6 +17,12 @@
         <td>Sur Name</td>
         <td>Street Address</td>
         <td>City</td>
+        <td>Zip Code</td>
+        <td>Country</td>
+        <td>Country Code</td>
+        <td>Telephone Country Code</td>
+        <td>EmailAddress</td>
+        <td>Birthday</td>
         <td>Total Balance</td>
     </tr>
     <tr>
@@ -22,6 +32,12 @@
         <td>@Model.Surname</td>
         <td>@Model.Streetaddress</td>
         <td>@Model.City</td>
+        <td>@Model.Zipcode</td>
+        <td>@Model.Country</td>
+        <td>@Model.CountryCode</td>
+        <td>@Model.TelephoneCountryCode</td>
+        <td>@Model.EmailAddress</td>
+        <td>@Model.Birthday</td>
         <td>@Model.TotalBalance</td>
     </tr>
 
@@ -35,9 +51,11 @@
                             <td>@account.AccountType</td>
                             <td class="td">
                                 @account.Balance<br>
-                                <a class="btn-solid-border" asp-page="Withdrawal" asp-route-Id="@account.Id">Withdrawal</a>
-                                <a class="btn-solid-border" asp-page="Deposit" asp-route-Id="@account.Id">Deposit</a>
-                                <a class="btn-solid-border" asp-page="AccountDetails" asp-route-Id="@account.Id">See transactions</a>
+                                <a class="btn-solid-border" asp-page="Withdrawal" asp-route-id="@account.Id">Withdrawal</a>
+                                <a class="btn-solid-border" asp-page="Deposit" asp-route-id="@account.Id">Deposit</a>
+                                <a class="btn-solid-border" asp-page="Transfer" asp-route-customerId="@Model.Id">Transfer</a>
+
+                                <a class="btn-solid-border" asp-page="AccountDetails" asp-route-id="@account.Id">See transactions</a>
                             </td>
                         }
                     </td>

@@ -75,11 +75,43 @@ namespace BankStartWeb.Services
                 return IAccountService.ErrorCode.AmountIsNegative;
             }
 
-            var status = Withdraw(fromAccountId, amount);
+            //Withdrawal from account:
+            var account1 = _context.Accounts.First(a => a.Id == fromAccountId);
+            if (account1.Balance < amount)
+            {
+                return IAccountService.ErrorCode.BalanceIsTooLow;
+            }
 
-            if (status == IAccountService.ErrorCode.Ok)
-            
-            Deposit(toAccountId, amount);
+            account1.Balance -= amount;
+
+            var transaction = new Transaction();
+            {
+                transaction.Type = "Debit";
+                transaction.Operation = "Withdrawal";
+                transaction.Date = DateTime.UtcNow;
+                transaction.Amount = amount;
+                transaction.NewBalance = account1.Balance;
+            }
+
+            account1.Transactions.Add(transaction);
+
+            //Deposit from account:
+            var account2 = _context.Accounts.First(a => a.Id == toAccountId);
+
+            account2.Balance += amount;
+
+            var transaction2 = new Transaction();
+            {
+                transaction2.Type = "Debit";
+                transaction2.Operation = "Deposit";
+                transaction2.Date = DateTime.UtcNow;
+                transaction2.Amount = amount;
+                transaction2.NewBalance = account2.Balance;
+            }
+
+            account2.Transactions.Add(transaction2);
+
+            _context.SaveChanges();
 
             return IAccountService.ErrorCode.Ok;
         }

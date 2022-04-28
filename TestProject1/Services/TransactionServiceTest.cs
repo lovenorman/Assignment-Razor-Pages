@@ -15,7 +15,6 @@ namespace TestProject1.Services
     public class TransactionServiceTest
     {
         private AccountService _sut;//System Under Test
-        //private readonly FakeTransactionService fakeTransaction;
         private ApplicationDbContext testContext;
 
         public TransactionServiceTest()
@@ -31,14 +30,14 @@ namespace TestProject1.Services
         [TestMethod]
         public void When_deposit_negative_amount_return_AmountIsNegative()
         {
-            var result = _sut.Deposit(1, -3, "Credit");
+            var result = _sut.Deposit(1, -3);
             Assert.AreEqual(IAccountService.ErrorCode.AmountIsNegative, result);
         }
 
         [TestMethod]
         public void When_withdraw_negative_amount_return_AmountIsNegative()
         {
-            var result = _sut.Withdraw(1, -3, "Dedit");
+            var result = _sut.Withdraw(1, -3);
             Assert.AreEqual(IAccountService.ErrorCode.AmountIsNegative, result);
         }
 
@@ -48,8 +47,9 @@ namespace TestProject1.Services
             var acc = new Account { Id = 1, Balance = 200, AccountType = "Personal" };
             testContext.Accounts.Add(acc);
             testContext.SaveChanges();
-            var result = _sut.Withdraw(1, 300, "Debit");
+            var result = _sut.Withdraw(1, 300);
             Assert.AreEqual(IAccountService.ErrorCode.BalanceIsTooLow, result);
         }
+
     }
 }
