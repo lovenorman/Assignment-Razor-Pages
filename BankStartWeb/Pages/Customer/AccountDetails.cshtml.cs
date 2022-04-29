@@ -64,7 +64,7 @@ namespace BankStartWeb.Pages.Customer
         {
             var query = _context.Accounts.Where(a => a.Id == id)
                 .SelectMany(a => a.Transactions)
-                .OrderBy(a => a.Date);
+                .OrderByDescending(t => t.Date);
 
             var pageResult = query.GetPaged(pageNumber, 5);
 
