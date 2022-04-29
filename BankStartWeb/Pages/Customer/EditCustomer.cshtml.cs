@@ -6,7 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BankStartWeb.Pages.Customer
 {
-    [Authorize(Roles = "Admin, Cashier")]
+    [Authorize(Roles = "Admin")]
+    [BindProperties]
     public class EditCustomerModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -33,9 +34,9 @@ namespace BankStartWeb.Pages.Customer
         public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
 
-        public void OnGet(int personId)
+        public void OnGet(int id)
         {
-            var customer = _context.Customers.First(c => c.Id == personId);
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
             Givenname = customer.Givenname;
             Surname = customer.Surname;
             Streetaddress = customer.Streetaddress;
@@ -50,11 +51,11 @@ namespace BankStartWeb.Pages.Customer
             Birthday = customer.Birthday;
         }
 
-        public IActionResult OnPost(int personId)
+        public IActionResult OnPost(int id)
         {
             if (ModelState.IsValid)
             {
-                var customer = _context.Customers.First(e => e.Id == personId);
+                var customer = _context.Customers.FirstOrDefault(e => e.Id == id);
                 customer.Givenname = Givenname;
                 customer.Surname = Surname;
                 customer.Streetaddress = Streetaddress;
@@ -70,7 +71,7 @@ namespace BankStartWeb.Pages.Customer
 
                 _context.SaveChanges();
 
-                return RedirectToPage("CustomersDetail", new { Id =  personId});
+                return RedirectToPage("CustomerDetail", new { Id =  id});
             }
 
             return Page();

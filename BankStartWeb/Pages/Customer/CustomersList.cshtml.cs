@@ -85,50 +85,6 @@ namespace BankStartWeb.Pages.Customer
                 City = c.City
             }).ToList();
 
-
-            //SortById (eller personnr?) ska flyttas
-
-            //SearchId = searchId;
-            //var i = _context.Customers.AsQueryable();
-
-            //i = i.Where(i => i.Id == searchId);
-
-
-
-            
-            
-            //Gamla OrderBy
-
-            //if(col ==  "id")
-            //{
-            //    if (order == "asc")
-            //        c = c.OrderBy(ord => ord.Id);
-            //    else
-            //        c = c.OrderByDescending(ord => ord.Id);
-            //}
-            //else if(col == "givenName")
-            //{
-            //    if (order == "asc")
-            //        c = c.OrderBy(ord => ord.Givenname);
-            //    else
-            //        c = c.OrderByDescending(ord => ord.Givenname);
-            //}
-            //else if (col == "surName")
-            //{
-            //    if (order == "asc")
-            //        c = c.OrderBy(ord => ord.Surname);
-            //    else
-            //        c = c.OrderByDescending(ord => ord.Surname);
-            //}
-            //else if (col == "streetAddress")
-            //{
-            //    if (order == "asc")
-            //        c = c.OrderBy(ord => ord.Streetaddress);
-            //    else
-            //        c = c.OrderByDescending(ord => ord.Streetaddress);
-            //}
-
-
         }
     }
 }

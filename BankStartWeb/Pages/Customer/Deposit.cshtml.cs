@@ -17,9 +17,9 @@ namespace BankStartWeb.Pages.Customer
             _accountService = accountService;
         }
 
+        [BindProperty]
         [Range(1, 5000)]
         public decimal Amount { get; set; }
-        public string Type { get; set; }
         public string AccountType { get; set; }
 
         public void OnGet(int id)
