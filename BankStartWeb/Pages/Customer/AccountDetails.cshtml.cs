@@ -46,7 +46,7 @@ namespace BankStartWeb.Pages.Customer
         public void OnGet(int id)
         {
             var account = _context.Accounts
-                .Include(a => a.Transactions)
+                .Include(t => t.Transactions.OrderByDescending(t => t.Date))
                 .First(a => a.Id == id);
             Id = account.Id;
             AccountType = account.AccountType;
@@ -63,7 +63,8 @@ namespace BankStartWeb.Pages.Customer
         public IActionResult OnGetFetchMore(int id, int pageNumber)
         {
             var query = _context.Accounts.Where(a => a.Id == id)
-                .SelectMany(a => a.Transactions);
+                .SelectMany(a => a.Transactions)
+                .OrderBy(a => a.Date);
 
             var pageResult = query.GetPaged(pageNumber, 5);
 

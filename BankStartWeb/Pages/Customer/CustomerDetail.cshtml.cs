@@ -46,11 +46,11 @@ namespace BankStartWeb.Pages.Customer
             public decimal Balance { get; set; }
         }
 
-        public void OnGet(int Id)
+        public void OnGet(int id)
         {
             var customer = _context.Customers
                 .Include(c => c.Accounts)
-                .First(c => c.Id == Id);
+                .First(c => c.Id == id);
             Id = customer.Id;
             NationalId = customer.NationalId;
             Givenname = customer.Givenname; 

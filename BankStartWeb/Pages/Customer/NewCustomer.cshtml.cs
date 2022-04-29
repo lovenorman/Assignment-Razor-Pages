@@ -24,10 +24,14 @@ namespace BankStartWeb.Pages.Customer
         public string Country { get; set; }
         public string CountryCode { get; set; }
         public string NationalId { get; set; }
+
+        //[Range(0, 3)]
         public int TelephoneCountryCode { get; set; }
 
-        [Range(0, 10, ErrorMessage = "9 siffror max")]
+        //[Range(0, 10, ErrorMessage = "9 siffror max")]
         public string Telephone { get; set; }
+
+        [EmailAddress]
         public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
         

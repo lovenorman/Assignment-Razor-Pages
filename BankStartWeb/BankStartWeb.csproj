@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\Validation\" />
+    <Folder Include="Pages\Customer\AccountsManager\" />
   </ItemGroup>
 
 </Project>

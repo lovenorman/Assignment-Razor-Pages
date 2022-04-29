@@ -6,7 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BankStartWeb.Pages.Customer
 {
-    [Authorize(Roles = "Admin, Cashier")]
+    [Authorize(Roles = "Admin")]
+    [BindProperties]
     public class EditCustomerModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -26,16 +27,16 @@ namespace BankStartWeb.Pages.Customer
         public string NationalId { get; set; }
         public int TelephoneCountryCode { get; set; }
 
-        [Range(0, 10, ErrorMessage = "9 siffror max")]
+        //[Range(0, 10, ErrorMessage = "9 siffror max")]
         public string Telephone { get; set; }
 
         [EmailAddress]
         public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
 
-        public void OnGet(int Id)
+        public void OnGet(int id)
         {
-            var customer = _context.Customers.First(c => c.Id == Id);
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
             Givenname = customer.Givenname;
             Surname = customer.Surname;
             Streetaddress = customer.Streetaddress;
@@ -54,14 +55,23 @@ namespace BankStartWeb.Pages.Customer
         {
             if (ModelState.IsValid)
             {
-                var customer = _context.Customers.First(e => e.Id == id);
+                var customer = _context.Customers.FirstOrDefault(e => e.Id == id);
                 customer.Givenname = Givenname;
                 customer.Surname = Surname;
                 customer.Streetaddress = Streetaddress;
+                customer.City = City;
+                customer.Zipcode = Zipcode;
+                customer.Country = Country;
+                customer.CountryCode = CountryCode;
+                customer.NationalId = NationalId;
+                customer.TelephoneCountryCode = TelephoneCountryCode;
+                customer.Telephone = Telephone;
+                customer.EmailAddress = EmailAddress;
+                customer.Birthday = Birthday;
 
                 _context.SaveChanges();
 
-                return RedirectToPage("CustomersDetail", new { id = id });
+                return RedirectToPage("CustomerDetail", new { Id =  id});
             }
 
             return Page();
