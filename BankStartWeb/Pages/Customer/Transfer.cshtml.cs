@@ -18,17 +18,15 @@ namespace BankStartWeb.Pages.Customer
             _context = context;
             _accountService = accountService;
         }
-
-        [BindProperty]
+        
         public int CustomerId { get; set; }
-        [BindProperty]
         public string Name { get; set; }
         [BindProperty]
         public decimal Amount { get; set; }
         [BindProperty]
-        public string FromAccount { get; set; }
+        public int FromAccount { get; set; }
         [BindProperty]
-        public string ToAccount { get; set; }
+        public int ToAccount { get; set; }
 
         public List<SelectListItem> AllAccounts { get; set; }
 
@@ -62,14 +60,14 @@ namespace BankStartWeb.Pages.Customer
             });
         }
 
-        public IActionResult OnPost(int fromAccountId, int toAccountId, decimal amount)
+        public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
-                var status = _accountService.Transfer(fromAccountId, toAccountId, amount);
+                var status = _accountService.Transfer(FromAccount, ToAccount, Amount);
                 if (status == IAccountService.ErrorCode.Ok)
                 {
-                    return RedirectToPage("AccountDetails", new { id = fromAccountId });
+                    return RedirectToPage("AccountDetails", new { id = FromAccount });
                 }
                 ModelState.AddModelError("Amount", "Beloppet är fel");
 

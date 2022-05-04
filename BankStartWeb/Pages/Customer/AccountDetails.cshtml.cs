@@ -8,14 +8,6 @@ using System.Linq;
 
 namespace BankStartWeb.Pages.Customer
 {
-    //1. När man klickar på ett kontonummer i kundbilden ska man komma till en
-    //  kontosida som visar kontonummer och saldo samt en lista med transaktioner
-    //  i descending order.
-
-    //2. Om det finns fler än 20 transaktioner ska
-    //  JavaScript/AJAX användas för att ladda in ytterligare 20 transaktioner
-    //  när man trycker på en knapp längst ned i listan. Trycker man igen laddas
-    //  20 till, och så vidare.
 
     [Authorize(Roles = "Admin, Cashier")]
     [BindProperties]
@@ -32,6 +24,7 @@ namespace BankStartWeb.Pages.Customer
         public string AccountType { get; set; }
         public DateTime Created { get; set; }
         public decimal Balance { get; set; }
+        public decimal NewBalance { get; set; }
         public int TotalBalance { get; set; }
 
         public class Transactions
@@ -50,13 +43,14 @@ namespace BankStartWeb.Pages.Customer
                 .First(a => a.Id == id);
             Id = account.Id;
             AccountType = account.AccountType;
-            Created = account.Created;  
+            Created = account.Created;
             Balance = account.Balance;
 
             var customer = _context.Customers
                 .Include(c => c.Accounts)
                 .First(c => c.Id == id);
 
+            
             TotalBalance = (int)customer.Accounts.Sum(x => x.Balance);
         }
 

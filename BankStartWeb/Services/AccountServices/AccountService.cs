@@ -68,7 +68,7 @@ namespace BankStartWeb.Services
             return IAccountService.ErrorCode.Ok;
         }
 
-        public IAccountService.ErrorCode Transfer(int fromAccountId, int toAccountId, decimal amount)
+        public IAccountService.ErrorCode Transfer(int fromAccountId, int toAccountId, decimal amount )
         {
             if (amount < 0)
             {
@@ -77,6 +77,7 @@ namespace BankStartWeb.Services
 
             //Withdrawal from account:
             var account1 = _context.Accounts.First(a => a.Id == fromAccountId);
+
             if (account1.Balance < amount)
             {
                 return IAccountService.ErrorCode.BalanceIsTooLow;
@@ -86,7 +87,7 @@ namespace BankStartWeb.Services
 
             var transaction = new Transaction();
             {
-                transaction.Type = "Debit";
+                transaction.Type = "Crebit";
                 transaction.Operation = "Withdrawal";
                 transaction.Date = DateTime.UtcNow;
                 transaction.Amount = amount;
