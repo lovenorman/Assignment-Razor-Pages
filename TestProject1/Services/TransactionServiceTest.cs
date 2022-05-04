@@ -51,5 +51,12 @@ namespace TestProject1.Services
             Assert.AreEqual(IAccountService.ErrorCode.BalanceIsTooLow, result);
         }
 
+        [TestMethod]
+        public void When_transfer_negative_amount_return__AmountIsNegative()
+        {
+            var result = _sut.Transfer(1, 2, -3);
+            Assert.AreEqual(IAccountService.ErrorCode.AmountIsNegative, result);
+        }
+
     }
 }

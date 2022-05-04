@@ -28,8 +28,11 @@ public class DataInitializer
 
     private void SeedUser()//Log In for my teacher. 
     {
-        CreateUserIfNotExist("stefan@banken.se", "Hejsan123456#",
-            new[] { "Admin", "Cashier" });
+        CreateUserIfNotExist("stefan.holmberg@systementor.se", "Hejsan123#",
+           new[] { "Admin" });
+
+        CreateUserIfNotExist("stefan.holmberg@customer.banken.se", "Hejsan123#",
+           new[] { "Cashier" });
     }
 
     private void CreateUserIfNotExist(string email, string password, string[] roles)

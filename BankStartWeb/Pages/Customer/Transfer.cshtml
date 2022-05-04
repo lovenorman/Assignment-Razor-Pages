@@ -4,8 +4,9 @@
 }
 
 <h1>Transfer</h1>
+<h4>@Model.Name</h4>
 
-<form>
+<form method="post">
     <div class="form-group">
         <label asp-for="FromAccount">From</label>
         <select class="form-control" asp-for="FromAccount" asp-items="@Model.AllAccounts" >
@@ -26,6 +27,6 @@
         <span class="field-validation-error" asp-validation-for="Amount"></span>
     </div>
 
-    <button asp-route-customerId="@Model.customerId" asp-route-FromAccount="@Model.FromAccount" asp-route-ToAccount="@Model.ToAccount" type="submit" class="btn-solid-border">Transfer</button>
+    <button type="submit" class="btn-solid-border">Transfer</button>
     @*<a class="btn-solid-border" asp-page="AccountDetails" >Cancel</a>*@
 </form>

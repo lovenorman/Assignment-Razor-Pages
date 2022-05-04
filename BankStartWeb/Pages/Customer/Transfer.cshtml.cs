@@ -18,27 +18,35 @@ namespace BankStartWeb.Pages.Customer
             _context = context;
             _accountService = accountService;
         }
-
-        [BindProperty(SupportsGet = true)]
-        public int customerId { get; set; }
+        
+        public int CustomerId { get; set; }
+        public string Name { get; set; }
+        [BindProperty]
         public decimal Amount { get; set; }
         [BindProperty]
-        public string FromAccount { get; set; }
+        public int FromAccount { get; set; }
         [BindProperty]
-        public string ToAccount { get; set; }
+        public int ToAccount { get; set; }
 
         public List<SelectListItem> AllAccounts { get; set; }
 
-        public void OnGet()
+        public void OnGet(int customerId)
         {
-            SetAllAccounts(customerId);
+            CustomerId = customerId;
+            SetAllAccounts();
+            var customer = _context.Customers  //För att visa Name på kund
+                .First(c => c.Id == customerId);
+            Name = customer.Givenname + " " + customer.Surname;
         }
 
-        public void SetAllAccounts(int customerId)
+        public void SetAllAccounts()
         {
             //Hämtar kund och include alla konton hos kunden som matchar id(anger mapp som typ pga 2 "customer" som filnamn
-            Data.Customer customer = _context.Customers.Include(e => e.Accounts).FirstOrDefault(e => e.Id == customerId); //Jag vill komma åt de konton som tillhör specifik kund
-            //Hämtar alla konton hos kund
+            var customer = _context.Customers
+                .Include(e => e.Accounts)
+                .FirstOrDefault(e => e.Id == CustomerId); //Jag vill komma åt de konton som tillhör specifik kund
+            
+            //Hämtar alla konton hos kund och populerar en lista
             AllAccounts = customer.Accounts.Select(account => new SelectListItem
             {
                 Text = account.AccountType + " " + account.Balance,
@@ -52,14 +60,14 @@ namespace BankStartWeb.Pages.Customer
             });
         }
 
-        public IActionResult OnPost(int fromAccountId, int toAccountId, decimal amount)
+        public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
-                var status = _accountService.Transfer(fromAccountId, toAccountId, amount);
+                var status = _accountService.Transfer(FromAccount, ToAccount, Amount);
                 if (status == IAccountService.ErrorCode.Ok)
                 {
-                    return RedirectToPage("AccountDetails", new { id = fromAccountId });
+                    return RedirectToPage("AccountDetails", new { id = FromAccount });
                 }
                 ModelState.AddModelError("Amount", "Beloppet är fel");
 
@@ -67,7 +75,7 @@ namespace BankStartWeb.Pages.Customer
             }
 
             //Ritar om formuläret med fel
-            //SetAllAccounts();
+            SetAllAccounts();
 
             return Page();
         }
