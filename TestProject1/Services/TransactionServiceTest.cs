@@ -44,6 +44,7 @@ namespace TestProject1.Services
         [TestMethod]
         public void When_withdraw_overtrass_return_BalanceIsTooLow()
         {
+            
             var acc = new Account { Id = 1, Balance = 200, AccountType = "Personal" };
             testContext.Accounts.Add(acc);
             testContext.SaveChanges();
@@ -52,10 +53,49 @@ namespace TestProject1.Services
         }
 
         [TestMethod]
-        public void When_transfer_negative_amount_return__AmountIsNegative()
+        public void When_transfer_negative_amount_return_AmountIsNegative()
         {
             var result = _sut.Transfer(1, 2, -3);
             Assert.AreEqual(IAccountService.ErrorCode.AmountIsNegative, result);
+        }
+
+        [TestMethod]
+
+        public void When_transfer_overtrass_return_BalanceIsTooLow()
+        {
+            var arrange1 = new Account
+            {
+                Id = 1,
+                Balance = 200,
+                AccountType = "Personal"
+            };
+            
+            var arrange2 = new Account { Id = 2, Balance = 200, AccountType = "Personal" };
+            testContext.Accounts.Add(arrange1);
+            testContext.Accounts.Add(arrange2);
+            testContext.SaveChanges();
+            var result = _sut.Transfer(1, 2, 300);
+            Assert.AreEqual(IAccountService.ErrorCode.BalanceIsTooLow, result);
+        }
+
+        public void When_deposit_make_new_transaction()
+        {
+            //Skapa ett fake konto med ny lista av transactions
+            var arrAccount = new Account
+            {
+                Id = 1,
+                Balance = 200,
+                AccountType = "Personal"
+            };
+            testContext.Accounts.Add(arrAccount);
+
+            var result = _sut.Deposit(1, 100);
+
+            //Assert.IsTrue()
+
+            //Assert.AreEqual(IAccountService.ErrorCode.AmountIsNegative, result);
+
+
         }
 
     }
