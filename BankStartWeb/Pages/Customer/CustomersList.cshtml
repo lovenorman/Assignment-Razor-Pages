@@ -8,6 +8,11 @@
 .allCustomersContent
 {
     margin: 20px;
+    justify-content: space-around;
+}
+.tableRow
+{
+    font-weight:700;
 }
 </style>
 
@@ -19,13 +24,12 @@
         </div>
     </div>
     <div  class="allCustomersContent">
-        <form method="GET">
-            <label>Search by National Id</label>
-            <input asp-for="@Model.SearchId"/>
+        <form method="GET" class="allCustomersContent">
+            <input type="number" asp-for="@Model.SearchId" placeholder="National Id"/>
             <input type="submit" value="Search" />
-
-            <label>Search by Name or City</label>
-            <input asp-for="@Model.SearchWord"/>
+        </form>
+        <form>
+            <input type="text" asp-for="@Model.SearchWord" placeholder="Name/City"/>
             <input type="submit" value="Search" />
         </form>
     </div>
@@ -34,7 +38,7 @@
 
 
 <table class="table">
-    <tr>
+    <tr class="tableRow">
         <td>Id
             <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="id" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
@@ -71,7 +75,7 @@
             <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="city" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
-    </tr>
+    </tr¨>
     @foreach(var customer in Model.CustomersList)
     {
         <tr class="td">    
@@ -92,14 +96,14 @@
         <td>
             @if (Model.PageNo > 1)
             {
-                <a asp-page="CustomersList" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder"  asp-route-searchWord="@Model.SearchWord"   asp-route-pageno="@(Model.PageNo - 1)">Prev</a>
+                <a class="btn-solid-border" asp-page="CustomersList" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder"  asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-pageno="@(Model.PageNo - 1)">Prev</a>
             }
         </td>
-        <td> Visar sidan @Model.PageNo av totalt @Model.TotalPageCount  </td>
+        <td class="tableRow"> Visar sidan @Model.PageNo av totalt @Model.TotalPageCount  </td>
         <td>
             @if (Model.PageNo < Model.TotalPageCount)
             {
-                <a asp-page="CustomersList" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder" asp-route-searchWord="@Model.SearchWord" asp-route-pageno="@(Model.PageNo + 1)">Next</a>
+                <a class="btn-solid-border" asp-page="CustomersList" asp-route-col="@Model.SortCol" asp-route-order="@Model.SortOrder" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-pageno="@(Model.PageNo + 1)">Next</a>
             }
         </td>
     </tr>
