@@ -3,25 +3,42 @@
 @{
 }
 
-<h2>Transactions from @Model.AccountType</h2>
+<style>
+.detailsContent
+{
+    margin: 20px;
+    justify-content: space-around;
+}
+.tableRow
+{
+    font-weight:700;
+}
+</style>
 
-<div>
-    <a class="btn-solid-border" asp-page="Withdrawal" asp-route-id="@Model.Id">Withdrawal</a>
-    <a class="btn-solid-border" asp-page="Deposit" asp-route-id="@Model.Id">Deposit</a><br >
-    <a class="btn-solid-border" asp-page="Transfer" asp-route-customerId="@Model.Id">Transfer</a><br >
-    <table class="table" id="posts-table">
-        <tr>
-           <td>Type</td>
-           <td>Operation</td>
-           <td>Date</td>
-           <td>Amount</td>
-        </tr>
-    </table><br>
 
-    <a class="btn-solid-border" href="javascript:fetchMore();">See more</a><br>
 
-    <h3>Total Balance: @Model.TotalBalance</h3><br>
+<div class="table">
+    <div>
+        <h2>Transactions from @Model.AccountType</h2>
+        <div class="td">
+            <a class="btn-solid-border" asp-page="Withdrawal" asp-route-id="@Model.Id">Withdrawal</a>
+            <a class="btn-solid-border" asp-page="Deposit" asp-route-id="@Model.Id">Deposit</a><br >
+            <a class="btn-solid-border" asp-page="Transfer" asp-route-customerId="@Model.Id">Transfer</a><br >
+        </div>
+    
+        <table class="table" id="posts-table">
+            <tr>
+               <td>Type</td>
+               <td>Operation</td>
+               <td>Date</td>
+               <td>Amount</td>
+            </tr>
+        </table><br>
 
+        <a class="btn-solid-border" href="javascript:fetchMore();">See more</a><br>
+
+        <h3>Total Balance: @Model.TotalBalance</h3><br>
+    </div>
 </div>
 
 @section Scripts
