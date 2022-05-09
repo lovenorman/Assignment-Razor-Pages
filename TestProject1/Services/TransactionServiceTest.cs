@@ -45,10 +45,10 @@ namespace TestProject1.Services
         public void When_withdraw_overtrass_return_BalanceIsTooLow()
         {
             
-            var acc = new Account { Id = 1, Balance = 200, AccountType = "Personal" };
+            var acc = new Account { Id = 5, Balance = 200, AccountType = "Personal" };
             testContext.Accounts.Add(acc);
             testContext.SaveChanges();
-            var result = _sut.Withdraw(1, 300);
+            var result = _sut.Withdraw(5, 300);
             Assert.AreEqual(IAccountService.ErrorCode.BalanceIsTooLow, result);
         }
 
@@ -70,7 +70,13 @@ namespace TestProject1.Services
                 AccountType = "Personal"
             };
             
-            var arrange2 = new Account { Id = 2, Balance = 200, AccountType = "Personal" };
+            var arrange2 = new Account 
+            { 
+                Id = 2, 
+                Balance = 200, 
+                AccountType = "Personal" 
+            };
+
             testContext.Accounts.Add(arrange1);
             testContext.Accounts.Add(arrange2);
             testContext.SaveChanges();
@@ -78,25 +84,25 @@ namespace TestProject1.Services
             Assert.AreEqual(IAccountService.ErrorCode.BalanceIsTooLow, result);
         }
 
+        [TestMethod]
         public void When_deposit_make_new_transaction()
         {
-            //Skapa ett fake konto med ny lista av transactions
+            //Skapar ett fakekonto
             var arrAccount = new Account
             {
-                Id = 1,
+                Id = 3,
                 Balance = 200,
                 AccountType = "Personal"
             };
+            //lägger till kontot till fake DB
             testContext.Accounts.Add(arrAccount);
+            testContext.SaveChanges();
 
-            var result = _sut.Deposit(1, 100);
+            //Kör deposit, sätter in 100 på konto 3
+            _sut.Deposit(3, 100);
 
-            //Assert.IsTrue()
-
-            //Assert.AreEqual(IAccountService.ErrorCode.AmountIsNegative, result);
-
-
+            //Jämför första transactions amount med 100
+            Assert.AreEqual(100, arrAccount.Transactions.First().Amount);
         }
-
     }
 }

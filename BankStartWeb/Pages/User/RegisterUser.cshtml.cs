@@ -82,6 +82,11 @@ namespace BankStartWeb.Pages.User
                     Text = "Admin"
                 }
             };
+            AllRoles.Insert(0, new SelectListItem
+            {
+                Value = "",
+                Text = "Please select a role"
+            });
         }
     }
 }

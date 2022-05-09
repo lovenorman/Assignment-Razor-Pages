@@ -3,29 +3,41 @@
 @{
 }
 
-<form method="post">
+<style>
+.registerTable{
+    margin: auto;
+    width: 50%;
+}
+</style>
 
-    <div class="form-group">
-        <label asp-for="Email">Email</label>
-        <input class="form-control" asp-for="Email" />  
-        <span asp-validation-for="Email" class="field-validation-error"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="RepeatEmail">Repeat email</label>
-        <input class="form-control" asp-for="RepeatEmail" />  
-        <span asp-validation-for="RepeatEmail" class="field-validation-error"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password">Password</label>
-        <input class="form-control" asp-for="Password" />  
-        <span asp-validation-for="Password" class="field-validation-error"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Roles"></label>
-        <select class="form-control" asp-for="Roles" asp-items="@Model.AllRoles">
-        </select>
-        <span asp-validation-for="Roles" class="field-validation-error"></span>
+
+<div class="card card-body registerTable">
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input class="form-control" asp-for="Email" />  
+            <span asp-validation-for="Email" class="field-validation-error"></span>
         </div>
-    <button type="submit" class="btn">Save</button>
+        <div class="form-group">
+            <label asp-for="RepeatEmail">Repeat email</label>
+            <input class="form-control" asp-for="RepeatEmail" />  
+            <span asp-validation-for="RepeatEmail" class="field-validation-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input class="form-control" asp-for="Password" />  
+            <span asp-validation-for="Password" class="field-validation-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Roles"></label>
+            <select class="form-control" asp-for="Roles" asp-items="@Model.AllRoles">
+            </select>
+            <span asp-validation-for="Roles" class="field-validation-error"></span>
+        </div>
 
-</form>
+        <button type="submit" class="btn">Save</button>
+
+    </form>
+</div>
+
+

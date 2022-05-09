@@ -4,28 +4,34 @@
 }
 
 
-
+<style>
+.allCustomersContent
+{
+    margin: 20px;
+}
+</style>
 
 <div class="table">
-    <h1>All Customers</h1>
     <div>
-        <a class="btn-solid-border" asp-page="NewCustomer">Create new</a>
+        <h1>All Customers</h1>
+        <div class="allCustomersContent">
+            <a class="btn-solid-border" asp-page="NewCustomer">Create new</a>
+        </div>
     </div>
-    </div>
-    <div>
+    <div  class="allCustomersContent">
         <form method="GET">
-        <label>Search by id</label>
-        <input asp-for="@Model.SearchId"/>
-        <input type="submit" value="Search" />
-    </form>
+            <label>Search by National Id</label>
+            <input asp-for="@Model.SearchId"/>
+            <input type="submit" value="Search" />
+
+            <label>Search by Name or City</label>
+            <input asp-for="@Model.SearchWord"/>
+            <input type="submit" value="Search" />
+        </form>
     </div>
-    <div>
-        <form method="GET">
-        <label>Search by name or city</label>
-        <input asp-for="@Model.SearchWord"/>
-        <input type="submit" value="Search" />
-    </form>
-    </div>
+</div>
+    
+
 
 <table class="table">
     <tr>
@@ -76,8 +82,8 @@
             <td>@customer.Streetaddress</td>
             <td>@customer.City</td>
             <td class="td">
-                <a class="btn-main, btn-solid-border" asp-page="EditCustomer" asp-route-id="@customer.Id">Edit</a><br>
-                <a class="btn-main, btn-solid-border" asp-page="CustomerDetail" asp-route-id="@customer.Id">Details</a>
+                <a class="btn-main btn-solid-border allCustomersContent" asp-page="EditCustomer" asp-route-id="@customer.Id">Edit</a>
+                <a class="btn-main btn-solid-border allCustomersContent" asp-page="CustomerDetail" asp-route-id="@customer.Id">Details</a>
             </td>
         </tr>
     }
