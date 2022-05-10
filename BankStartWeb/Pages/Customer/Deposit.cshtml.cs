@@ -2,6 +2,7 @@ using BankStartWeb.Data;
 using BankStartWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NToastNotify;
 using System.ComponentModel.DataAnnotations;
 
 namespace BankStartWeb.Pages.Customer
@@ -10,11 +11,13 @@ namespace BankStartWeb.Pages.Customer
     {
         private ApplicationDbContext _context;
         private IAccountService _accountService;
+        private readonly IToastNotification _toastNotification;
 
-        public DepositModel(ApplicationDbContext context, IAccountService accountService)
+        public DepositModel(ApplicationDbContext context, IAccountService accountService, IToastNotification toastNotification)
         {
             _context = context;
             _accountService = accountService;
+            _toastNotification = toastNotification;
         }
 
         [BindProperty]
@@ -38,7 +41,8 @@ namespace BankStartWeb.Pages.Customer
                 var status = _accountService.Deposit(id, amount);
                 if (status == IAccountService.ErrorCode.Ok)
                 {
-                    return RedirectToPage("AccountDetails", new { id = id });
+                    _toastNotification.AddSuccessToastMessage("Deposit succesful!");
+                    return RedirectToPage("AccountDetails", new { Id = id });
                 }
                 ModelState.AddModelError("Amount", "Beloppet är fel");
             }

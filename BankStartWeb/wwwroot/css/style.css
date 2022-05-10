@@ -1510,5 +1510,9 @@ form {
    justify-content: space-around;
 }
 
+body{
+    min-height: 100vh;
+}
+
 
 /*# sourceMappingURL=maps/style.css.map */

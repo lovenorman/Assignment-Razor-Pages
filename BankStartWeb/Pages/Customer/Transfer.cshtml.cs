@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using System.ComponentModel.DataAnnotations;
 
 namespace BankStartWeb.Pages.Customer
@@ -12,11 +13,13 @@ namespace BankStartWeb.Pages.Customer
     {
         private ApplicationDbContext _context;
         public IAccountService _accountService;
-        
-        public TransferModel(ApplicationDbContext context, IAccountService accountService)
+        private readonly IToastNotification _toastNotification;
+
+        public TransferModel(ApplicationDbContext context, IAccountService accountService, IToastNotification toastNotification)
         {
             _context = context;
             _accountService = accountService;
+            _toastNotification = toastNotification;
         }
         
         public int CustomerId { get; set; }
@@ -67,6 +70,7 @@ namespace BankStartWeb.Pages.Customer
                 var status = _accountService.Transfer(FromAccount, ToAccount, Amount);
                 if (status == IAccountService.ErrorCode.Ok)
                 {
+                    _toastNotification.AddSuccessToastMessage("Transfer succesful!");
                     return RedirectToPage("AccountDetails", new { id = FromAccount });
                 }
                 ModelState.AddModelError("Amount", "Beloppet är fel");

@@ -40,6 +40,7 @@ namespace BankStartWeb.Pages.Customer
         
         public void OnGet()
         {
+            Birthday = DateTime.Today;
         }
 
         public IActionResult OnPost()
@@ -65,7 +66,8 @@ namespace BankStartWeb.Pages.Customer
                 _context.SaveChanges();
                 _toastNotification.AddSuccessToastMessage("New customer created!");
 
-                return RedirectToPage("CustomersList");
+                return RedirectToPage("CustomerDetail", new { Id = newCustomer.Id });
+                //return RedirectToPage("CustomersList");
             }
 
             //Visar felen och ritar om sidan
