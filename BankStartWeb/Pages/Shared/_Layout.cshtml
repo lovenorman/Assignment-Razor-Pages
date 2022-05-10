@@ -71,7 +71,7 @@
 				<a class="nav-link" asp-page="/Customer/CustomersList">Customers</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" asp-page="">Privacy</a>
+				<a class="nav-link" asp-page="/Privacy">Privacy</a>
 			  </li>
 
 				@if (SignInManager.IsSignedIn(User))
@@ -117,22 +117,7 @@
 					</ul>
 				</div>
 			</div>
-
-			@*<div class="col-lg-2 col-md-6 col-sm-6">
-				<div class="widget mb-5 mb-lg-0">
-					<h4 class="text-capitalize mb-3">Departments</h4>
-					<div class="divider mb-4"></div>
-
-					<ul class="list-unstyled footer-menu lh-35">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Wome's Health</a></li>
-						<li><a href="#">Radiology</a></li>
-						<li><a href="#">Cardioc</a></li>
-						<li><a href="#">Medicine</a></li>
-					</ul>
-				</div>
-			</div>*@
-
+			
 			<div class="col-lg-2 col-md-6 col-sm-6">
 				<div class="widget mb-5 mb-lg-0">
 					<h4 class="text-capitalize mb-3">Support</h4>
@@ -207,9 +192,9 @@
 
     
     <!-- Main jQuery -->
-    <script src="/plugins/jquery/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Bootstrap 4.3.2 -->
-    <script src="/plugins/bootstrap/js/popper.js"></script>
+ @*   <script src="/plugins/bootstrap/js/popper.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/counterup/jquery.easing.js"></script>
     <!-- Slick Slider -->
@@ -218,16 +203,17 @@
     <script src="/plugins/counterup/jquery.waypoints.min.js"></script>
     
     <script src="/plugins/shuffle/shuffle.min.js"></script>
-    <script src="/plugins/counterup/jquery.counterup.min.js"></script>
-    <!-- Google Map -->
+    <script src="/plugins/counterup/jquery.counterup.min.js"></script>*@
+    @*<!-- Google Map -->
     <script src="/plugins/google-map/map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
     
     <script src="/js/script.js"></script>
-    <script src="/js/contact.js"></script>
+    <script src="/js/contact.js"></script>*@
 
 
 	@await RenderSectionAsync("Scripts", required: false)
+	@await Component.InvokeAsync("NToastNotify")
 
 	<partial name="_ValidationScriptsPartial"/>
   

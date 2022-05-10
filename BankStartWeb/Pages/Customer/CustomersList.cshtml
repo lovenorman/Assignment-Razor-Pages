@@ -10,6 +10,13 @@
     margin: 20px;
     justify-content: space-around;
 }
+.allCustomersTable {
+    width: 80%;
+}
+.searchForm
+{
+    margin-bottom: 20px;
+}
 .tableRow
 {
     font-weight:700;
@@ -24,7 +31,7 @@
         </div>
     </div>
     <div  class="allCustomersContent">
-        <form method="GET" class="allCustomersContent">
+        <form class="searchForm">
             <input type="number" asp-for="@Model.SearchId" placeholder="National Id"/>
             <input type="submit" value="Search" />
         </form>
@@ -37,42 +44,42 @@
     
 
 
-<table class="table">
+<table class="table allCustomersTable">
     <tr class="tableRow">
         <td>Id
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="id" asp-route-order="asc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="id" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="id" asp-route-order="desc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="id" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>National Id
-            <a asp-page="CustomersList" asp-route-searchWord="" asp-route-col="nationalId" asp-route-order="asc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="nationalId" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="CustomersList" asp-route-searchWord="" asp-route-col="nationalId" asp-route-order="desc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="nationalId" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>Given Name
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="givenName" asp-route-order="asc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="givenName" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="givenName" asp-route-order="desc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="givenName" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>Sur Name
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="surName" asp-route-order="asc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="surName" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="surName" asp-route-order="desc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="surName" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>Street Address
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="streetAddress" asp-route-order="asc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="streetAddress" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="streetAddress" asp-route-order="desc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="streetAddress" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
         <td>City
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="city" asp-route-order="asc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="city" asp-route-order="asc" >
                 <i class='bx bx-sort-up'></i></a>
-            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-col="city" asp-route-order="desc" >
+            <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="city" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
     </tr¨>

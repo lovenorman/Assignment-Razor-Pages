@@ -2,6 +2,7 @@ using BankStartWeb.Data;
 using BankStartWeb.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,9 +24,21 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddNToastNotifyToastr(new ToastrOptions()
+{
+    ProgressBar = false,
+    PositionClass = ToastPositions.TopCenter
+}); ;
+
 builder.Services.AddTransient<DataInitializer>();
 builder.Services.AddTransient<IAccountService, AccountService>();
+
+//builder.Services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+//{
+//    ProgressBar = false,
+//    PositionClass = ToastPositions.TopCenter
+//});
+
 var app = builder.Build();
 
 
@@ -54,6 +67,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseNToastNotify();
 
 app.MapRazorPages();
 

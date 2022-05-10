@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using NToastNotify;
 
 namespace BankStartWeb.Pages.Customer
 {
@@ -11,10 +12,12 @@ namespace BankStartWeb.Pages.Customer
     public class NewCustomerModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly IToastNotification _toastNotification;
 
-        public NewCustomerModel(ApplicationDbContext context)
+        public NewCustomerModel(ApplicationDbContext context, IToastNotification toastNotification)
         {
             _context = context;
+            _toastNotification = toastNotification;
         }
         public string Givenname { get; set; }
         public string Surname { get; set; }
@@ -58,7 +61,9 @@ namespace BankStartWeb.Pages.Customer
                 newCustomer.Birthday = Birthday;
 
                 _context.Customers.Add(newCustomer);
+                newCustomer.Accounts.Add(new Account { AccountType = "Personal", Created = DateTime.Now, Balance = 0});
                 _context.SaveChanges();
+                _toastNotification.AddSuccessToastMessage("New customer created!");
 
                 return RedirectToPage("CustomersList");
             }

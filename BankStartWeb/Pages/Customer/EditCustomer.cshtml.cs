@@ -2,6 +2,7 @@ using BankStartWeb.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NToastNotify;
 using System.ComponentModel.DataAnnotations;
 
 namespace BankStartWeb.Pages.Customer
@@ -11,10 +12,12 @@ namespace BankStartWeb.Pages.Customer
     public class EditCustomerModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        
-        public EditCustomerModel(ApplicationDbContext context)
+        private readonly IToastNotification _toastNotification;
+
+        public EditCustomerModel(ApplicationDbContext context, IToastNotification toastNotification)
         {
             _context = context;
+            _toastNotification = toastNotification;
         }
 
         public string Givenname { get; set; }
@@ -70,6 +73,7 @@ namespace BankStartWeb.Pages.Customer
                 customer.Birthday = Birthday;
 
                 _context.SaveChanges();
+                _toastNotification.AddSuccessToastMessage("Customer edited");
 
                 return RedirectToPage("CustomerDetail", new { Id =  id});
             }
