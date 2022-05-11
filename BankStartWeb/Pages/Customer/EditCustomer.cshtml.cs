@@ -19,18 +19,35 @@ namespace BankStartWeb.Pages.Customer
             _context = context;
             _toastNotification = toastNotification;
         }
-
+        
+        [MaxLength(30)]
         public string Givenname { get; set; }
+
+        [MaxLength(30)]
         public string Surname { get; set; }
+
+        [MaxLength(30)]
         public string Streetaddress { get; set; }
+
+        [MaxLength(30)]
         public string City { get; set; }
+
+        [MaxLength(5)]
         public string Zipcode { get; set; }
+
+        [MaxLength(30)]
         public string Country { get; set; }
+      
+        [MaxLength(2, ErrorMessage = "2 letters only")]
         public string CountryCode { get; set; }
+
+        [MaxLength(12)]
         public string NationalId { get; set; }
+
+        [Range(0, 3, ErrorMessage = "2 digits only")]
         public int TelephoneCountryCode { get; set; }
 
-        //[Range(0, 10, ErrorMessage = "9 siffror max")]
+        [MaxLength(9)]
         public string Telephone { get; set; }
 
         [EmailAddress]

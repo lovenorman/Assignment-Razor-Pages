@@ -9,14 +9,12 @@ public class DataInitializer
     private readonly ApplicationDbContext _dbContext;
     private readonly UserManager<IdentityUser> _userManager;
 
-
     public DataInitializer(ApplicationDbContext dbContext,
         UserManager<IdentityUser> userManager)
     {
         _dbContext = dbContext;
         _userManager = userManager;
     }
-
 
     public void SeedData()
     {
@@ -76,6 +74,7 @@ public class DataInitializer
     }
 
     private static Random random = new Random();
+
     private Customer GenerateCustomer()
     {
         // f.Date.Between(new DateTime(1999,1,1), new DateTime(1940,1,1))
@@ -121,7 +120,6 @@ public class DataInitializer
             person = testUser.Generate(1).First();
         }
 
-
         else 
         {
             var testUser = new Faker<Customer>("fi")
@@ -147,12 +145,8 @@ public class DataInitializer
             person.Accounts.Add(GenerateAccount());
         }
 
-        
-
-
         return person;
     }
-
 
     private Account GenerateAccount()
     {

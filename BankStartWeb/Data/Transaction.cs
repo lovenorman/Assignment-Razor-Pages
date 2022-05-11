@@ -8,6 +8,7 @@ public class Transaction
 
     [MaxLength(10)]
     public string Type { get; set; }
+
     [MaxLength(50)]
     public string Operation { get; set; }
     public DateTime Date { get; set; }

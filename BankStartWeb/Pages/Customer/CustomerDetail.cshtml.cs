@@ -10,19 +10,13 @@ namespace BankStartWeb.Pages.Customer
     [BindProperties]
     public class CustomerDetailModel : PageModel
     {
-        //1. Det ska gå att ta fram en kundbild genom att ange kundnummer.
-        //2. Kundbilden ska visa all information om kunden och alla kundens konton.
-        //3. Kundbilden ska också visa det totala saldot för kunden genom att
-        //   summera saldot på kundens konton.
-        //4. Genom attt klicka på ett kontonummer ska man komma vidare till
-        //   en kontosida.
-
         private readonly ApplicationDbContext _context;
 
         public CustomerDetailModel(ApplicationDbContext context)
         {
             _context = context;
         }
+
         public int Id { get; set; }
         public string Givenname { get; set; }
         public string Surname { get; set; }
@@ -73,7 +67,6 @@ namespace BankStartWeb.Pages.Customer
             }).ToList();
 
             TotalBalance = (int)customer.Accounts.Sum(x => x.Balance);
-            
         }
     }
 }
