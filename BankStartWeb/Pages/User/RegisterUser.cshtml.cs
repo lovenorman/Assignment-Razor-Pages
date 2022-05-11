@@ -45,27 +45,6 @@ namespace BankStartWeb.Pages.User
         {
             SetRoles();
         }
-
-        //public IActionResult OnPost()
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = new IdentityUser();
-        //        {
-        //            user.Email = Email;
-        //            user.PasswordHash = Password;
-        //            user.EmailConfirmed = EmailConfirmed;
-        //        };
-
-        //        _userManager.CreateAsync(user, Password).Wait();
-        //        _userManager.AddToRoleAsync(user, Roles).Wait();
-
-        //        return RedirectToPage("CustomersList");
-        //    }
-
-        //    SetRoles();
-        //    return Page();
-        //}
         
         private void SetRoles()
         {

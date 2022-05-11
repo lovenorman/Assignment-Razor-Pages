@@ -33,14 +33,7 @@ builder.Services.AddRazorPages().AddNToastNotifyToastr(new ToastrOptions()
 builder.Services.AddTransient<DataInitializer>();
 builder.Services.AddTransient<IAccountService, AccountService>();
 
-//builder.Services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
-//{
-//    ProgressBar = false,
-//    PositionClass = ToastPositions.TopCenter
-//});
-
 var app = builder.Build();
-
 
 using (var scope = app.Services.CreateScope())
 {

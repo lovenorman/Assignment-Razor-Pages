@@ -6,10 +6,8 @@ public class Account
 {
     public int Id { get; set; }
 
-
-    [MaxLength(10)]
+    [MaxLength(10)] 
     public string AccountType { get; set; }
-
     public DateTime Created { get; set; }
     public decimal Balance { get; set; }
 

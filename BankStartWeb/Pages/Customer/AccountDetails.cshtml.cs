@@ -14,7 +14,6 @@ namespace BankStartWeb.Pages.Customer
     public class AccountDetailsModel : PageModel
     {
         private ApplicationDbContext _context;
-
         public AccountDetailsModel(ApplicationDbContext context)
         {
             _context = context;

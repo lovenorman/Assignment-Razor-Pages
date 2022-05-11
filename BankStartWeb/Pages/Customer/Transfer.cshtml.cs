@@ -24,10 +24,13 @@ namespace BankStartWeb.Pages.Customer
         
         public int CustomerId { get; set; }
         public string Name { get; set; }
+
         [BindProperty]
         public decimal Amount { get; set; }
+
         [BindProperty]
         public int FromAccount { get; set; }
+
         [BindProperty]
         public int ToAccount { get; set; }
 

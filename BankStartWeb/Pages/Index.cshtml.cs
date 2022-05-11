@@ -16,9 +16,7 @@ namespace BankStartWeb.Pages
             _context = context;
         }
         public int TotalAmountOfAccounts { get; set; }
-
         public int TotalAmountOfCustomers { get; set; }
-
         public int TotalBalance { get; set; }
 
         public void OnGet()

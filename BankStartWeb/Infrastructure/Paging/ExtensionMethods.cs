@@ -12,7 +12,6 @@ namespace BankStartWeb.Infrastructure.Paging
             result.PageSize = pageSize;
             result.RowCount = query.Count();
 
-
             var pageCount = (double)result.RowCount / pageSize;
             result.PageCount = (int)Math.Ceiling(pageCount);
 
@@ -22,19 +21,18 @@ namespace BankStartWeb.Infrastructure.Paging
             return result;
         }
 
-
         public enum QuerySortOrder
         {
             Asc,
             Desc
         }
+
         public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string propertyName, QuerySortOrder sortOrder)
         {
             if (sortOrder == QuerySortOrder.Asc)
                 return source.OrderBy(ToLambda<T>(propertyName));
             return source.OrderByDescending(ToLambda<T>(propertyName));
         }
-
 
         private static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string propertyName)
         {

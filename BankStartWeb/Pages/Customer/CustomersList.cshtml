@@ -3,7 +3,6 @@
 @{
 }
 
-
 <style>
 .allCustomersContent
 {
@@ -41,8 +40,6 @@
         </form>
     </div>
 </div>
-    
-
 
 <table class="table allCustomersTable">
     <tr class="tableRow">
@@ -82,7 +79,8 @@
             <a asp-page="CustomersList" asp-route-searchWord="@Model.SearchWord" asp-route-searchId="@Model.SearchId" asp-route-col="city" asp-route-order="desc" >
                 <i class='bx bx-sort-down' ></i></a>
         </td>
-    </tr¨>
+    </tr>
+
     @foreach(var customer in Model.CustomersList)
     {
         <tr class="td">    
