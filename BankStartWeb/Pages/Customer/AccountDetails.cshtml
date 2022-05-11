@@ -13,17 +13,22 @@
 {
     font-weight:700;
 }
+.buttonMargin
+{
+    padding: 20px;
+}
 </style>
-
-
 
 <div class="table">
     <div>
         <h2>Transactions from @Model.AccountType</h2>
-        <div class="td">
+        <div class="buttonMargin">
+            <h3>Total Balance: @Model.Balance</h3>
+        </div>
+        <div class="buttonMargin">
             <a class="btn-solid-border" asp-page="Withdrawal" asp-route-id="@Model.Id">Withdrawal</a>
-            <a class="btn-solid-border" asp-page="Deposit" asp-route-id="@Model.Id">Deposit</a><br >
-            <a class="btn-solid-border" asp-page="Transfer" asp-route-customerId="@Model.Id">Transfer</a><br >
+            <a class="btn-solid-border" asp-page="Deposit" asp-route-id="@Model.Id">Deposit</a>
+            <a class="btn-solid-border" asp-page="Transfer" asp-route-customerId="@Model.Id">Transfer</a>
         </div>
     
         <table class="table" id="posts-table">
@@ -37,7 +42,10 @@
 
         <a class="btn-solid-border" href="javascript:fetchMore();">See more</a><br>
 
-        <h3>Total Balance: @Model.TotalBalance</h3><br>
+        <div class="buttonMargin">
+            <h3>Total Balance: @Model.Balance</h3>
+        </div>
+        
     </div>
 </div>
 

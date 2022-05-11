@@ -8,7 +8,7 @@ namespace BankStartWeb.Services
         {
             Ok,
             BalanceIsTooLow,
-            AmountIsNegative,
+            AmountIsTooLow,
         }
 
         ErrorCode Withdraw(int Id, decimal Amount);

@@ -46,10 +46,8 @@ namespace BankStartWeb.Pages.Customer
             Created = account.Created;
             Balance = account.Balance;
 
-            var customer = _context.Customers
-                .Include(c => c.Accounts)
-                .First(c => c.Id == id);
-
+            var customer = _context.Customers.Include(e=>e.Accounts).First(e => e.Accounts.Any(r => r.Id == id));
+          
             
             TotalBalance = (int)customer.Accounts.Sum(x => x.Balance);
         }
@@ -67,7 +65,7 @@ namespace BankStartWeb.Pages.Customer
                 Id = i.Id,
                 Type = i.Type,
                 Operation = i.Operation,
-                Date = i.Date.ToString("yy-M-d H:m"),
+                Date = i.Date.ToLocalTime().ToString("yy-M-d H:m"),
                 Amount = i.Amount,
             }).ToList();
 

@@ -1502,13 +1502,16 @@ a:focus {
     width: 70%;
 }
 
-
 form {
     align-content: center;
 }
 
 .td{
    justify-content: space-around;
+}
+
+body{
+    min-height: 100vh;
 }
 
 

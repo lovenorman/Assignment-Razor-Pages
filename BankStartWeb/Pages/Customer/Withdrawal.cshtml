@@ -2,17 +2,34 @@
 @model BankStartWeb.Pages.Customer.WithdrawalModel
 @{
 }
-<h1>Withdrawal</h1>
 
-<form method="post" class="table">
-    
-    <div class="form-group">
-        <label asp-for="Amount">Amount</label>
-        <input class="form-control" asp-for="Amount" value="0,0"/>
-        <span class="field-validation-error" asp-validation-for="Amount"></span>
+<style>
+.withdrawalContent
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 200px;
+    width: 50%;
+}
+</style>
+
+<div class="withdrawalContent">
+    <div>
+        <h1>Withdrawal from</h1>
+        <h3>@Model.AccountType</h3>
     </div>
+    <div>
+        <form method="post" class="table">
+            <div class="form-group">
+                <label asp-for="Amount">Amount</label>
+                <input class="form-control" asp-for="Amount" value="0,0"/>
+                <span class="field-validation-error" asp-validation-for="Amount"></span>
+            </div>
 
-    <button type="submit" class="btn-solid-border">Withdraw</button>
+            <button type="submit" class="btn-solid-border">Withdraw</button>
 
-    @*<a class="btn-solid-border" asp-page="AccountDetails" >Cancel</a>*@
-</form>
+            @*<a class="btn-solid-border" asp-page="AccountDetails" >Cancel</a>*@
+        </form>
+    </div>
+</div>
+    

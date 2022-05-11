@@ -2,17 +2,37 @@
 @model BankStartWeb.Pages.Customer.DepositModel
 @{
 }
-<h1>Deposit</h1>
-<h3>@Model.AccountType</h3>
+<style>
+.depositContent
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 200px;
+    width: 50%;
+}
+</style>
 
-<form method="post" class="table">
-    
-    <div class="form-group">
-        <label asp-for="Amount">Amount</label>
-        <input class="form-control" asp-for="Amount" value="0,0"/>
-        <span class="field-validation-error" asp-validation-for="Amount"></span>
+<div class="depositContent">
+    <div>
+        <h1>Deposit from</h1>
+        <h3>@Model.AccountType</h3>
     </div>
+    <div>
 
-    <button type="submit" class="btn-solid-border">Deposit</button>
-    @*<a class="btn-solid-border" asp-page="AccountDetails" asp-route-id="@Model.">Cancel</a>*@
-</form>
+    </div>
+    
+
+    <form method="post" class="table">
+    
+        <div class="form-group">
+            <label asp-for="Amount">Amount</label>
+            <input class="form-control" asp-for="Amount" value="0,0"/>
+            <span class="field-validation-error" asp-validation-for="Amount"></span>
+        </div>
+
+        <button type="submit" class="btn-solid-border">Deposit</button>
+        @*<a class="btn-solid-border" asp-page="AccountDetails" asp-route-id="@Model.">Cancel</a>*@
+    </form>
+</div>
+
+
