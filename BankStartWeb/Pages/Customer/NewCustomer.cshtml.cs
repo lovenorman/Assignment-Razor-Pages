@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using NToastNotify;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BankStartWeb.Pages.Customer
 {
@@ -40,22 +41,99 @@ namespace BankStartWeb.Pages.Customer
         [MaxLength(2, ErrorMessage = "2 letters only")]
         public string CountryCode { get; set; }
 
-        [MaxLength(12)]
+        [MaxLength(13)]
         public string NationalId { get; set; }
 
-        [Range(0, 3, ErrorMessage = "2 digits only")]
+        [Range(11, 99)]
         public int TelephoneCountryCode { get; set; }
 
-        [MaxLength(9)]
+        [MaxLength(20)]
         public string Telephone { get; set; }
 
         [EmailAddress]
         public string EmailAddress { get; set; }
         public DateTime Birthday { get; set; }
 
+        public List<SelectListItem> AllCountries { get; set; }
+
+        public List<SelectListItem> AllCountryCodes { get; set; }
+
         public void OnGet()
         {
             Birthday = DateTime.Today;
+            SetAllLists();
+        }
+
+        private void SetAllLists()
+        {
+            SetAllCountries();
+            SetAllCountryCodes();
+        }
+
+        private void SetAllCountryCodes()
+        {
+            AllCountryCodes = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value = "DE",
+                    Text = "DE"
+                },
+                new SelectListItem()
+                {
+                    Value = "FI",
+                    Text = "FI"
+                },
+                new SelectListItem()
+                {
+                    Value = "NO",
+                    Text = "NO"
+                },
+                new SelectListItem()
+                {
+                    Value = "SE",
+                    Text = "SE"
+                }
+            };
+
+            AllCountryCodes.Insert(0, new SelectListItem
+            {
+                Value = "",
+                Text = "Select a country code"
+            });
+        }
+
+        private void SetAllCountries()
+        {
+            AllCountries = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value = "Danmark",
+                    Text = "Danmark"
+                },
+                new SelectListItem()
+                {
+                    Value = "Finland",
+                    Text = "Finland"
+                },
+                new SelectListItem()
+                {
+                    Value = "Norge",
+                    Text = "Norge"
+                },
+                new SelectListItem()
+                {
+                    Value = "Sverige",
+                    Text = "Sverige"
+                }
+            };
+
+            AllCountries.Insert(0, new SelectListItem
+            {
+                Value = "",
+                Text = "Select a country"
+            });
         }
 
         public IActionResult OnPost()
