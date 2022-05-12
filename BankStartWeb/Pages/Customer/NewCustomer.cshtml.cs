@@ -40,13 +40,13 @@ namespace BankStartWeb.Pages.Customer
         [MaxLength(2, ErrorMessage = "2 letters only")]
         public string CountryCode { get; set; }
 
-        [MaxLength(12)]
+        [MaxLength(13)]
         public string NationalId { get; set; }
 
-        [Range(0, 3, ErrorMessage = "2 digits only")]
+        [Range(11, 99)]
         public int TelephoneCountryCode { get; set; }
 
-        [MaxLength(9)]
+        [MaxLength(20)]
         public string Telephone { get; set; }
 
         [EmailAddress]
