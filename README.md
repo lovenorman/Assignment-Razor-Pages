@@ -23,7 +23,7 @@ As a cashier you can:
 
 Unit tests:
 - When making deposit,withdrawal or transfer with negative amount - return AmountIsNegative()
-- When withdrawal or transfering a bigger amount than there is - - return BalanceTooLow()
+- When withdrawal or transfering a bigger amount than there is - return BalanceTooLow()
 - When making any transaction - a new transacton is added to the List<Transactions>
 
 
